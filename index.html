@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Меню</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" />
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-container>
+        <v-row>
+          <v-col cols="6" sm="4" md="3" v-for="product in products" :key="product.id">
+              <v-card
+                class="pa-1 pb-3"
+                elevation="0"
+              >
+                <v-btn
+                  v-if="product.amount > 0"
+                  fab
+                  dark
+                  x-small
+                  elevation="0"
+                  absolute
+                  right
+                  color="yellow darken-4"
+                  class="mr-n3 text-subtitle-2"
+                >
+                  {{ product.amount }}
+                </v-btn>
+                <v-img
+                  class="rounded-xl"
+                  :src="'images/' + product.img"
+                ></v-img>
+            
+                <h3 class="text-center">
+                  {{ product.name }}
+                </h3>
+            
+                <div class="text-caption text-grey text-lowercase text-center">
+                  {{ product.description }}
+                </div>
+                <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
+                  <v-btn
+                    fab
+                    dark
+                    x-small
+                    elevation="0"
+                    class="mr-2"
+                    @click="product.amount--"
+                    color="red darken-1"
+                  >
+                    <v-icon dark>
+                      mdi-minus
+                    </v-icon>
+                  </v-btn>
+                  <v-btn
+                    fab
+                    dark
+                    x-small
+                    elevation="0"
+                    @click="product.amount++"
+                    color="yellow darken-4"
+                  >
+                    <v-icon dark>
+                      mdi-plus
+                    </v-icon>
+                  </v-btn>
+                </div>
+                <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
+                  <v-btn
+                    elevation="0"
+                    x-small
+                    dark
+                    @click="product.amount++"
+                    color="yellow darken-4"
+                  >
+                    Добавить
+                  </v-btn>
+                </div>
+              </v-card>
+          </div>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
