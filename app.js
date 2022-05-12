@@ -3,31 +3,53 @@ new Vue({
   vuetify: new Vuetify(),
   data() {
     return {
-      products_: []
+      categories_: []
     }
   },
   computed: {
-    products: {
+    categories: {
       get() {
-        if (this.products_ != undefined) return this.products_
+        if (this.categories_ != undefined) return this.categories_
         return []
       },
       set (newValue) {
-        this.products_ = newValue
+        this.categories_ = newValue
       }
+    },
+    toPay() {
+      let sum = 0
+      this.categories.forEach(c => {
+        c.products.forEach(p => {
+            sum += p.amount * p.price
+        })
+      })
+
+      return sum
     }
   },
   created() {
-    axios.get('https://api.1bot.edugid.org/product/list').then(response => {
-      response.data.forEach(x => {
-        this.products.push({
+    axios.get('https://api.1bot.edugid.org/category/list').then(response => {
+      response.data.forEach(x => {    
+        category = {
           id: x.id,
-          amount: 0,
-          img: x.img,
           name: x.name,
-          description: x.description
-        })
-      });
+          products: []
+        }
+        
+        x.products.forEach(p => {
+          category.products.push({
+            id: p.id,
+            name: p.name,
+            description: p.description,
+            price: p.price,
+            img: p.img,
+            amount: 0
+          })
+        })      
+
+        this.categories.push(category)
+      })
+      console.log(this.categories)
     })
   }
 })

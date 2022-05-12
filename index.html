@@ -17,79 +17,96 @@
   <div id="app">
     <v-app>
       <v-container>
-        <v-row>
-          <v-col cols="6" sm="4" md="3" v-for="product in products" :key="product.id">
-              <v-card
-                class="pa-1 pb-3"
-                elevation="0"
-              >
-                <v-btn
-                  v-if="product.amount > 0"
-                  fab
-                  dark
-                  x-small
+        <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
+          <h2 class="text-center my-3">{{ category.name }}</h2>
+          <v-row>
+            <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
+                <v-card
+                  class="pa-1 pb-3"
                   elevation="0"
-                  absolute
-                  right
-                  color="yellow darken-4"
-                  class="mr-n3 text-subtitle-2"
                 >
-                  {{ product.amount }}
-                </v-btn>
-                <v-img
-                  class="rounded-xl"
-                  :src="'images/' + product.img"
-                ></v-img>
-            
-                <h3 class="text-center">
-                  {{ product.name }}
-                </h3>
-            
-                <div class="text-caption text-grey text-lowercase text-center">
-                  {{ product.description }}
-                </div>
-                <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
                   <v-btn
+                    v-if="product.amount > 0"
                     fab
                     dark
                     x-small
                     elevation="0"
-                    class="mr-2"
-                    @click="product.amount--"
-                    color="red darken-1"
-                  >
-                    <v-icon dark>
-                      mdi-minus
-                    </v-icon>
-                  </v-btn>
-                  <v-btn
-                    fab
-                    dark
-                    x-small
-                    elevation="0"
-                    @click="product.amount++"
+                    absolute
+                    right
                     color="yellow darken-4"
+                    class="mr-n3 text-subtitle-2"
                   >
-                    <v-icon dark>
-                      mdi-plus
-                    </v-icon>
+                    {{ product.amount }}
                   </v-btn>
-                </div>
-                <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
-                  <v-btn
-                    elevation="0"
-                    x-small
-                    dark
-                    @click="product.amount++"
-                    color="yellow darken-4"
-                  >
-                    Добавить
-                  </v-btn>
-                </div>
-              </v-card>
-          </div>
+                  <v-img
+                    class="rounded-xl"
+                    height="100"
+                    :src="'images/' + product.img"
+                  ></v-img>
+              
+                  <h3 class="text-center">
+                    {{ product.name }}
+                  </h3>
+
+                  <div style="height: 60px;" class="text-caption text-grey text-lowercase text-center">
+                    {{ product.description }}
+                  </div>
+
+                  <div class="text-h6 text-lowercase red--text text--darken-1 text-center">
+                    {{ product.price }}с
+                  </div>
+
+                  <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
+                    <v-btn
+                      fab
+                      dark
+                      x-small
+                      elevation="0"
+                      class="mr-2"
+                      @click="product.amount--"
+                      color="red darken-1"
+                    >
+                    <span style="font-size: 24px;" class="mt-n1">-</span>
+                    </v-btn>
+                    <v-btn
+                      fab
+                      dark
+                      x-small
+                      elevation="0"
+                      @click="product.amount++"
+                      color="yellow darken-4"
+                    >
+                      <span style="font-size: 24px;" class="mt-n1">+</span>
+                    </v-btn>
+                  </div>
+                  <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
+                    <v-btn
+                      elevation="0"
+                      x-small
+                      dark
+                      @click="product.amount++"
+                      color="yellow darken-4"
+                    >
+                      Добавить
+                    </v-btn>
+                  </div>
+                </v-card>
+            </v-col>
+          </v-row>
         </div>
       </v-container>
+      <v-btn
+        v-if="toPay > 0"
+        fixed
+        color="success"
+        max-width="300"
+        block
+        dark
+        class="mb-n4"
+        center
+        bottom>
+          Оплатить {{ toPay }}c
+      </v-btn>
     </v-app>
   </div>
   <script src="app.js"></script>
