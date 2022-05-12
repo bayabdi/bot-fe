@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>Меню</title>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -23,6 +23,7 @@
             <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
                 <v-card
                   class="pa-1 pb-3"
+                  :max-width="200"
                   elevation="0"
                 >
                   <v-btn
@@ -66,7 +67,9 @@
                       @click="product.amount--"
                       color="red darken-1"
                     >
-                    <span style="font-size: 24px;" class="mt-n1">-</span>
+                      <v-icon>
+                        mdi-minus
+                      </v-icon>
                     </v-btn>
                     <v-btn
                       fab
@@ -76,13 +79,16 @@
                       @click="product.amount++"
                       color="yellow darken-4"
                     >
-                      <span style="font-size: 24px;" class="mt-n1">+</span>
+                      <v-icon>
+                        mdi-plus
+                      </v-icon>
                     </v-btn>
                   </div>
                   <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
                     <v-btn
                       elevation="0"
                       x-small
+                      class="py-4"
                       dark
                       @click="product.amount++"
                       color="yellow darken-4"
@@ -102,11 +108,23 @@
         max-width="300"
         block
         dark
-        class="mb-n4"
+        class="mb-n4 rounded-0 font-weight-bold py-5"
         center
         bottom>
           Оплатить {{ toPay }}c
       </v-btn>
+      <v-btn
+        fixed
+        color="success"
+        max-width="300"
+        block
+        dark
+        class="mb-n4 rounded-0 font-weight-bold py-5"
+        center
+        top
+        >
+          {{ height }}
+        </v-btn>
     </v-app>
   </div>
   <script src="app.js"></script>
