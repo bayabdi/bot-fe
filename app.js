@@ -6,13 +6,6 @@ new Vue({
       categories_: []
     }
   },
-  methods: {
-    run() {
-      alert('inner' + window.innerHeight)
-      alert('avail' + screen.availHeight)
-      alert('h' + screen.height)    
-    }
-  },
   computed: {
     categories: {
       get() {
@@ -32,9 +25,6 @@ new Vue({
       })
 
       return sum
-    },
-    height() {
-      return window.innerHeight
     }
   },
   created() {

@@ -108,24 +108,13 @@
         max-width="300"
         block
         dark
-        class="mb-n4 rounded-0 font-weight-bold py-5"
+        class="rounded-0 font-weight-bold py-5"
         center
-        bottom>
+        top
+        style="top: 0 !important;"
+      >
           Оплатить {{ toPay }}c
       </v-btn>
-      <v-btn
-        fixed
-        color="success"
-        max-width="300"
-        block
-        dark
-        class="mb-n4 rounded-0 font-weight-bold py-5"
-        center
-        @click="run"
-        top
-        >
-          {{ height }}
-        </v-btn>
     </v-app>
   </div>
   <script src="app.js"></script>
