@@ -16,105 +16,168 @@
 <body>
   <div id="app">
     <v-app>
-      <v-container>
-        <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
-          <h2 class="text-center my-3">{{ category.name }}</h2>
-          <v-row>
-            <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
-                <v-card
-                  class="pa-1 pb-3"
-                  :max-width="200"
-                  elevation="0"
-                >
-                  <v-btn
-                    v-if="product.amount > 0"
-                    fab
-                    dark
-                    x-small
+      <template v-if="!isOrder">
+        <v-container class="pt-10">
+          <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
+            <h2 class="text-center my-3">{{ category.name }}</h2>
+            <v-row>
+              <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
+                  <v-card
+                    class="pa-1 pb-3"
+                    :max-width="200"
                     elevation="0"
-                    absolute
-                    right
-                    color="yellow darken-4"
-                    class="mr-n3 text-subtitle-2"
                   >
-                    {{ product.amount }}
-                  </v-btn>
-                  <v-img
-                    class="rounded-xl"
-                    height="100"
-                    :src="'images/' + product.img"
-                  ></v-img>
-              
-                  <h3 class="text-center">
-                    {{ product.name }}
-                  </h3>
-
-                  <div style="height: 60px;" class="text-caption text-grey text-lowercase text-center">
-                    {{ product.description }}
-                  </div>
-
-                  <div class="text-h6 text-lowercase red--text text--darken-1 text-center">
-                    {{ product.price }}с
-                  </div>
-
-                  <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
                     <v-btn
+                      v-if="product.amount > 0"
                       fab
                       dark
                       x-small
                       elevation="0"
-                      class="mr-2"
-                      @click="product.amount--"
-                      color="red darken-1"
-                    >
-                      <v-icon>
-                        mdi-minus
-                      </v-icon>
-                    </v-btn>
-                    <v-btn
-                      fab
-                      dark
-                      x-small
-                      elevation="0"
-                      @click="product.amount++"
+                      absolute
+                      right
                       color="yellow darken-4"
+                      class="mr-n3 text-subtitle-2"
                     >
-                      <v-icon>
-                        mdi-plus
-                      </v-icon>
+                      {{ product.amount }}
                     </v-btn>
-                  </div>
-                  <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
-                    <v-btn
-                      elevation="0"
-                      x-small
-                      class="py-4"
-                      dark
-                      @click="product.amount++"
-                      color="yellow darken-4"
-                    >
-                      Добавить
-                    </v-btn>
-                  </div>
-                </v-card>
-            </v-col>
+                    <v-img
+                      class="rounded-xl"
+                      height="100"
+                      :src="'images/' + product.img"
+                    ></v-img>
+                
+                    <h3 class="text-center">
+                      {{ product.name }}
+                    </h3>
+
+                    <div style="height: 60px;" class="text-caption text-grey text-lowercase text-center">
+                      {{ product.description }}
+                    </div>
+
+                    <div class="text-h6 text-lowercase red--text text--darken-1 text-center">
+                      {{ product.price }}с
+                    </div>
+
+                    <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
+                      <v-btn
+                        fab
+                        dark
+                        x-small
+                        elevation="0"
+                        class="mr-2"
+                        @click="product.amount--"
+                        color="red darken-1"
+                      >
+                        <v-icon>
+                          mdi-minus
+                        </v-icon>
+                      </v-btn>
+                      <v-btn
+                        fab
+                        dark
+                        x-small
+                        elevation="0"
+                        @click="product.amount++"
+                        color="yellow darken-4"
+                      >
+                        <v-icon>
+                          mdi-plus
+                        </v-icon>
+                      </v-btn>
+                    </div>
+                    <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
+                      <v-btn
+                        elevation="0"
+                        x-small
+                        class="py-4"
+                        dark
+                        @click="product.amount++"
+                        color="yellow darken-4"
+                      >
+                        Добавить
+                      </v-btn>
+                    </div>
+                  </v-card>
+              </v-col>
+            </v-row>
+          </div>
+        </v-container>
+        <v-btn
+          v-if="toPay > 0"
+          fixed
+          color="success"
+          max-width="300"
+          block
+          dark
+          class="rounded-0 font-weight-bold py-5"
+          center
+          top
+          style="top: 0 !important; z-index: 9;"
+          @click="isOrder = true"
+        >
+            Заказать на  {{ toPay }}c
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-container class="pt-15">
+          <v-row class="justify-space-between align-center">
+            <h1 class="text-uppercase">ваш заказ</h1>
+            <v-btn large text color="green" @click="isOrder = !isOrder">Изменить</v-btn>
           </v-row>
-        </div>
-      </v-container>
-      <v-btn
-        v-if="toPay > 0"
-        fixed
-        color="success"
-        max-width="300"
-        block
-        dark
-        class="rounded-0 font-weight-bold py-5"
-        center
-        top
-        style="top: 0 !important;"
-      >
-          Оплатить {{ toPay }}c
-      </v-btn>
+          <template v-for="category in categories" :key="category.id">
+            <template v-for="product in category.products">
+              <v-row v-if="product.amount > 0">
+                <v-col cols="3">
+                  <v-img 
+                    :src="'images/' + product.img" 
+                    class="rounded-xl"
+                    max-width="150" 
+                    />
+                </v-col>
+                <v-col class="d-flex">
+                  <h1>
+                    {{ product.name }}
+                  </h1>
+                  </v-col>
+                  <v-col cols="3">
+                                      <h1
+                    class="yellow--text text--darken-4 font-weight-bold align-center"
+                  >
+                    {{ product.amount }}x
+                  </h1>
+                  </v-col>
+                <v-col cols="3">
+                  <p
+                    class="text-h6 text-lowercase red--text text--darken-1 text-end"
+                  >
+                    {{ product.price * product.amount }}c
+                  </p>
+                </v-col>
+              </v-row>
+            </template>
+          </template>
+          <v-row>
+            <v-text-field
+              class=""
+              placeholder="Комментарий"
+              filled
+            ></v-text-field>
+          </v-row>
+        </v-container>
+        <v-btn
+          fixed
+          color="success"
+          max-width="300"
+          block
+          dark
+          class="rounded-0 font-weight-bold py-5"
+          center
+          top
+          style="top: 0 !important; z-index: 9"
+        >
+            Оплатить
+        </v-btn>
+      </template>
     </v-app>
   </div>
   <script src="app.js"></script>

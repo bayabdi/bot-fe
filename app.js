@@ -3,7 +3,8 @@ new Vue({
   vuetify: new Vuetify(),
   data() {
     return {
-      categories_: []
+      categories_: [],
+      isOrder_: false
     }
   },
   computed: {
@@ -25,6 +26,14 @@ new Vue({
       })
 
       return sum
+    },
+    isOrder: {
+      get() {
+        return this.isOrder_
+      },
+      set(val) {
+        this.isOrder_ = val
+      }
     }
   },
   created() {
