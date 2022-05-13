@@ -120,37 +120,36 @@
       </template>
       <template v-else>
         <v-container class="pt-15">
-          <v-row class="justify-space-between align-center">
-            <h1 class="text-uppercase">ваш заказ</h1>
+          <v-row class="justify-space-between align-center mb-5">
+            <h1 class="">Ваш заказ</h1>
             <v-btn large text color="green" @click="isOrder = !isOrder">Изменить</v-btn>
           </v-row>
           <template v-for="category in categories" :key="category.id">
             <template v-for="product in category.products">
               <v-row v-if="product.amount > 0">
-                <v-col cols="3">
+                <v-col cols="3" sm="2" class="pa-0"> 
                   <v-img 
                     :src="'images/' + product.img" 
                     class="rounded-xl"
-                    max-width="150" 
                     />
                 </v-col>
-                <v-col class="d-flex">
-                  <h1>
+                <v-col cols="4" sm="3" class="d-flex align-center"  >
+                  <h2 class="font-weight-bold text-subtitle-2 text-sm-h4 text-wrap">
                     {{ product.name }}
-                  </h1>
+                  </h1> 
                   </v-col>
-                  <v-col cols="3">
-                                      <h1
-                    class="yellow--text text--darken-4 font-weight-bold align-center"
+                  <v-col cols="2"  class="d-flex align-center">
+                  <h1
+                    class="yellow--text text--darken-4 font-weight-bold"
                   >
                     {{ product.amount }}x
                   </h1>
                   </v-col>
-                <v-col cols="3">
+                <v-col cols="3" sm="5" class="d-flex align-end justify-end">
                   <p
-                    class="text-h6 text-lowercase red--text text--darken-1 text-end"
+                    class="text-h4 text-lowercase red--text text--darken-1"
                   >
-                    {{ product.price * product.amount }}c
+                    {{ product.price * product.amount }}C
                   </p>
                 </v-col>
               </v-row>
