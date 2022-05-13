@@ -6,6 +6,13 @@ new Vue({
       categories_: []
     }
   },
+  methods: {
+    run() {
+      alert('inner' + window.innerHeight)
+      alert('avail' + screen.availHeight)
+      alert('h' + screen.height)    
+    }
+  },
   computed: {
     categories: {
       get() {
@@ -27,15 +34,8 @@ new Vue({
       return sum
     },
     height() {
-      console.log(window.top.scrollY)
-      return window.top.scrollY
+      return window.innerHeight
     }
-  },
-  mounted() {
-    window.addEventListener("scroll", this.onScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll)
   },
   created() {
     axios.get('https://api.1bot.edugid.org/category/list').then(response => {
