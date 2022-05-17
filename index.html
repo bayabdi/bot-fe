@@ -157,7 +157,8 @@
           </template>
           <v-row>
             <v-text-field
-              class=""
+              v-model="comment"
+              class="mt-5"
               placeholder="Комментарий"
               filled
             ></v-text-field>
@@ -172,10 +173,20 @@
           class="rounded-0 font-weight-bold py-5"
           center
           top
+          @click="orderAdd"
           style="top: 0 !important; z-index: 9"
         >
             Оплатить
         </v-btn>
+        <v-snackbar 
+          v-model="snackBar"
+          multi-line
+          color="success"
+        >
+          <template>
+              <h3>Ваш заказ принят </h3> 
+          </template>
+        </v-snackbar>
       </template>
     </v-app>
   </div>
