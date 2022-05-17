@@ -33,38 +33,57 @@
   <body>
     <div id="admin">
       <v-app>
-        <div>
           <v-container>
-            <v-row>
-              <v-col class="text-center pa-0 ma-0">
-                <v-btn
-                    large
-                    block
-                    router
-                    disabled
-                    to="/viewRecipes"
-                    class="success rounded-0"
-                >
-                  Active
-                </v-btn>
-              </v-col>
-              <v-col class="pa-0 ma-0">
-                <v-btn large block router to="/createrecipe" class="warning rounded-0">
-                  Done
-                </v-btn>
+            <v-row class="justify-center align-center">
+              <v-col cols="5">
+                <v-card class="mt-16">
+                  <v-row>
+                    <v-col cols="6" class="text-center ma-0 pr-0 pt-0">
+                      <v-btn
+                        medium
+                        router
+                        block
+                        to="/"
+                        class="success rounded-0"
+                      >
+                        Active
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" class="ma-0 pl-0 pt-0">
+                      <v-btn
+                        medium
+                        block
+                        router
+                        to="/createrecipe"
+                        class="warning rounded-0"
+                      >
+                        Done
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                  <div class="">
+                    <v-row>
+                      <v-col v-for="n in 1" cols="9" sm="">
+                        <div class="pa-2" outlined tile>
+                          #181818 Жазгы жамгыр алыстабаа сапар албай тантырава
+                        </div>
+                      </v-col>
+                      <v-col cols="2" class="mt-1">
+                        <v-icon color="success">
+                          mdi-checkbox-marked-circle
+                        </v-icon>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-card>
               </v-col>
             </v-row>
           </v-container>
-        </div>
-        <v-container class="grey lighten-2" >
-          <v-row no-gutters>
-            <v-col v-for="n in 1" cols="12" sm="13">
-              <v-card class="pa-2" outlined tile> #181818 Жазгы жамгыр алыстабаа сапар албай тантырава </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
       </v-app>
     </div>
-    <script src="admin.js"></script>
+    <script src="admin.js">
+
+    </script>
   </body>
 </html>
+
