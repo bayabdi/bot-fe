@@ -182,9 +182,15 @@
           v-model="snackBar"
           multi-line
           color="success"
+          timeout="5000"
         >
           <template>
-              <h3>Ваш заказ принят </h3> 
+              <v-row class="justify-space-around"> 
+                <h3 class="my-auto">Ваш заказ принят </h3>
+                <v-btn @click="snackBar = false" text class="text-h6">
+                    OK
+                </v-btn>
+              </v-row>
           </template>
         </v-snackbar>
       </template>

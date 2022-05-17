@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>Меню</title>
+    <title>Заказы</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script
@@ -33,57 +33,52 @@
   <body>
     <div id="admin">
       <v-app>
-          <v-container>
-            <v-row class="justify-center align-center">
-              <v-col cols="5">
-                <v-card class="mt-16">
+        <v-container>
+          <v-row class="justify-center align-center">
+            <v-col cols="7">
+              <v-card class="mt-16">
+                <v-row>
+                  <v-col cols="6" class="text-center ma-0 pr-0 pt-0">
+                    <v-btn medium router block to="/" class="grey white--text rounded-0">
+                      Active
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" class="ma-0 pl-0 pt-0">
+                    <v-btn
+                      medium
+                      block
+                      router
+                      to="/createrecipe"
+                      class="warning rounded-0"
+                    >
+                      Done
+                    </v-btn>
+                  </v-col>
+                </v-row>
+                <div class="" v-for="order in orders" :key="order.id">
                   <v-row>
-                    <v-col cols="6" class="text-center ma-0 pr-0 pt-0">
-                      <v-btn
-                        medium
-                        router
-                        block
-                        to="/"
-                        class="success rounded-0"
-                      >
-                        Active
-                      </v-btn>
+                    <v-col cols="" sm="" class="pr-0 pt-5 text-center">
+                      <div class="pl-1">#{{ order.id }}</div>
                     </v-col>
-                    <v-col cols="6" class="ma-0 pl-0 pt-0">
-                      <v-btn
-                        medium
-                        block
-                        router
-                        to="/createrecipe"
-                        class="warning rounded-0"
-                      >
-                        Done
+                    <v-col cols="7" class="pt-5">
+                      <p v-for="product in order.products" :key="product.id">
+                        {{ product.name }} ({{ product.amount }} шт.)
+                      </p>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-btn class="text-caption" small color="success">
+                        Завершить
                       </v-btn>
                     </v-col>
                   </v-row>
-                  <div class="">
-                    <v-row>
-                      <v-col v-for="n in 1" cols="9" sm="">
-                        <div class="pa-2" outlined tile>
-                          #181818 Жазгы жамгыр алыстабаа сапар албай тантырава
-                        </div>
-                      </v-col>
-                      <v-col cols="2" class="mt-1">
-                        <v-icon color="success">
-                          mdi-checkbox-marked-circle
-                        </v-icon>
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+                  <v-divider class="my-3"/>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-app>
     </div>
-    <script src="admin.js">
-
-    </script>
+    <script src="admin.js"></script>
   </body>
 </html>
-

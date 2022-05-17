@@ -7,6 +7,7 @@ new Vue({
       isOrder_: false,
       comment: "",
       snackBar: false,
+      orders: [],
     }
   },
   methods: {
@@ -30,12 +31,10 @@ new Vue({
 
       console.log(sendData)
 
-      axios
-        .post("https://api.1bot.edugid.org/order/add", sendData)
-        .then((response) => {
-          this.snackBar = true
-        })
-    },
+      axios.post("https://api.1bot.edugid.org/order/add", sendData).then(() => {
+        this.snackBar = true
+      })
+    }
   },
   computed: {
     categories: {
