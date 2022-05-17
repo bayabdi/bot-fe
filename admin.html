@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Меню</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+      integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"
+    />
+  </head>
+  <body>
+    <div id="admin">
+      <v-app>
+          <v-container>
+            <v-row class="justify-center align-center">
+              <v-col cols="5">
+                <v-card class="mt-16">
+                  <v-row>
+                    <v-col cols="6" class="text-center ma-0 pr-0 pt-0">
+                      <v-btn
+                        medium
+                        router
+                        block
+                        to="/"
+                        class="success rounded-0"
+                      >
+                        Active
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" class="ma-0 pl-0 pt-0">
+                      <v-btn
+                        medium
+                        block
+                        router
+                        to="/createrecipe"
+                        class="warning rounded-0"
+                      >
+                        Done
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                  <div class="">
+                    <v-row>
+                      <v-col v-for="n in 1" cols="9" sm="">
+                        <div class="pa-2" outlined tile>
+                          #181818 Жазгы жамгыр алыстабаа сапар албай тантырава
+                        </div>
+                      </v-col>
+                      <v-col cols="2" class="mt-1">
+                        <v-icon color="success">
+                          mdi-checkbox-marked-circle
+                        </v-icon>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+      </v-app>
+    </div>
+    <script src="admin.js">
+
+    </script>
+  </body>
+</html>
+
