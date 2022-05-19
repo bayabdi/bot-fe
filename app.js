@@ -17,6 +17,8 @@ new Vue({
         products: [],
         comment: this.comment,
         sum: 0,
+        user_id: 0,
+        chat_id: 0
       }
       this.categories.forEach((category) => {
         category.products.forEach((product) => {

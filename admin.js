@@ -5,7 +5,8 @@ new Vue({
     return {
       orders_: [],
       page: 1,
-      pageSize: 12
+      pageSize: 12,
+      isDone_: false,
     }
   },
   computed: {
@@ -17,6 +18,14 @@ new Vue({
         this.orders_ = val
       },
     },
+    isDone: {
+      get() {
+        return this.isDone_
+      },
+      set(val) {
+        this.isDone_ = val
+      },
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll)
@@ -25,14 +34,21 @@ new Vue({
     window.removeEventListener("scroll", this.onScroll)
   },
   methods: {
-    getOrders() {
+    getOrders(isDone = false, toClear = false) {
+      if (toClear) {
+        this.orders = []
+        this.page = 1
+      }
+
       axios
         .get(
           "https://api.1bot.edugid.org/order/list?page=" +
             this.page +
             "&pageSize=" +
-            this.pageSize
-            + "&isDone=False&isPaid=False"
+            this.pageSize +
+            "&isDone=" +
+            isDone +
+            "&isPaid=False"
         )
         .then((response) => {
           response.data.list.forEach((x) => {
@@ -45,7 +61,7 @@ new Vue({
       if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
         this.getOrders()
       }
-    }
+    },
   },
   created() {
     this.getOrders()
