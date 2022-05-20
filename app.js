@@ -7,6 +7,7 @@ new Vue({
       isOrder_: false,
       comment: "",
       snackBar: false,
+      isError: false,
       orders: [],
       user_id: 0,
       chat_id: 0
@@ -33,10 +34,12 @@ new Vue({
         })
       })
 
-      console.log(sendData)
-
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then(() => {
         this.snackBar = true
+        window.Telegram.WebApp.sendData("заказ #12")
+      }).catch(err => {
+        this.isError = false
+        console.log(err)
       })
     },
   },

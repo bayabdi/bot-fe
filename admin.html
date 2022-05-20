@@ -47,7 +47,7 @@
                       class="white--text rounded-0"
                       :class="{ 'orange': isDone }"
                       :disabled="!isDone"
-                      >
+                    >
                       Active
                     </v-btn>
                   </v-col>
@@ -75,8 +75,13 @@
                         {{ product.name }} ({{ product.amount }} шт.)
                       </p>
                     </v-col>
-                    <v-col cols="1"  class="">
-                      <v-btn class="text-caption mr-1" small color="success">
+                    <v-col cols="1" class="">
+                      <v-btn
+                        class="text-caption mr-1" 
+                        small 
+                        color="success"
+                        @click=""
+                        >
                         ОК
                       </v-btn>
                     </v-col>
