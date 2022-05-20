@@ -17,9 +17,6 @@
 <body>
   <div id="app">
     <v-app>
-      <pre>
-        {{ telegram }}
-      </pre>
       <template v-if="!isOrder">
         <v-container class="pt-10">
           <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
