@@ -44,7 +44,7 @@ new Vue({
             id: data.data,
             title: 'Заказ',
             input_message_content: {
-              message_text: 'Заказбек'
+              message_text: 'Заказ #' + data.data
             }
           }
         })
