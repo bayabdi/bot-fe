@@ -8,6 +8,8 @@ new Vue({
       comment: "",
       snackBar: false,
       orders: [],
+      user_id: 0,
+      chat_id: 0
     }
   },
   methods: {
@@ -17,8 +19,8 @@ new Vue({
         products: [],
         comment: this.comment,
         sum: 0,
-        user_id: 0,
-        chat_id: 0
+        user_id: this.user_id,
+        chat_id: this.chat_id
       }
       this.categories.forEach((category) => {
         category.products.forEach((product) => {
@@ -36,7 +38,7 @@ new Vue({
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then(() => {
         this.snackBar = true
       })
-    }
+    },
   },
   computed: {
     categories: {
@@ -65,9 +67,14 @@ new Vue({
       set(val) {
         this.isOrder_ = val
       },
-    },
+    }
   },
   created() {
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    this.user_id = urlParams.get('user_id')
+    this.chat_id = urlParams.get("chat_id")
+
     axios.get("https://api.1bot.edugid.org/category/list").then((response) => {
       response.data.forEach((x) => {
         category = {
