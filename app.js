@@ -51,6 +51,7 @@ new Vue({
           console.log(data)
         }).catch(error => {
           console.log(error)
+          alert(error)
         })
       }).catch(err => {
         this.isError = false
