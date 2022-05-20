@@ -51,10 +51,10 @@ new Vue({
           console.log(data)
         }).catch(error => {
           console.log(error)
-          alert(error)
+          this.isError = true
         })
       }).catch(err => {
-        this.isError = false
+        this.isError = true
         console.log(err)
       })
     },
