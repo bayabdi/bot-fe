@@ -34,9 +34,9 @@ new Vue({
         })
       })
 
-      axios.post("https://api.1bot.edugid.org/order/add", sendData).then(() => {
+      axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
         this.snackBar = true
-        window.Telegram.WebApp.close()
+        window.Telegram.WebApp.sendData("Заказ #" + data.data)
       }).catch(err => {
         this.isError = false
         console.log(err)
