@@ -1,6 +1,3 @@
-const { Telegraf } = require('telegraf')
-const bot = new Telegraf('5349968988:AAE9Zf6AtKpQy14oSl5VENc19KmZ7DD4m0E')
-
 new Vue({
   el: "#app",
   vuetify: new Vuetify(),
@@ -40,7 +37,7 @@ new Vue({
 
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
         this.snackBar = true
-        bot.telegram.answerWebAppQuery({
+        axios.post("https://api.telegram.org/5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery", {
           web_app_query_id: this.telegram.initDataUnsafe.query_id,
           result: {
             type: 'article',
@@ -50,6 +47,10 @@ new Vue({
               message_text: 'Заказбек'
             }
           }
+        }).then(data => {
+          console.log(data)
+        }).catch(error => {
+          console.log(error)
         })
       }).catch(err => {
         this.isError = false
