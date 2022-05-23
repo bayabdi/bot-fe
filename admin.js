@@ -7,6 +7,8 @@ new Vue({
       page: 1,
       pageSize: 12,
       isDone_: false,
+      id: null,
+      order: null
     }
   },
   computed: {
@@ -34,7 +36,7 @@ new Vue({
     window.removeEventListener("scroll", this.onScroll)
   },
   methods: {
-    getOrders(isDone = false, toClear = false) {
+    getOrders(toClear = false) {
       if (toClear) {
         this.orders = []
         this.page = 1
@@ -47,7 +49,7 @@ new Vue({
             "&pageSize=" +
             this.pageSize +
             "&isDone=" +
-            isDone +
+            this.isDone +
             "&isPaid=False"
         )
         .then((response) => {
@@ -62,8 +64,35 @@ new Vue({
         this.getOrders()
       }
     },
+    done(id) {
+      axios
+        .post(
+          "https://api.1bot.edugid.org/order/done?id=" + id
+        )
+        .then((response) => {
+          this.isDone = true
+          this.getOrders(true)
+        })
+    },
+    getOrder() {
+      axios.get("https://api.1bot.edugid.org/order/get?id=" + this.id)
+      .then(res => {
+        this.order = res.data
+        console.log(this.order)
+      })
+    }
   },
   created() {
-    this.getOrders()
-  },
+    
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    this.id = urlParams.get("id")
+    
+    console.log(this.id)
+
+    if (this.id === null)
+      this.getOrders()
+    else
+      this.getOrder()
+  }
 })

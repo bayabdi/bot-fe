@@ -55,7 +55,7 @@
                       {{ product.description }}
                     </div>
 
-                    <div class="text-h6 text-lowercase red--text text--darken-1 text-center">
+                    <div class="text-h6 text-lowercase mt-1 red--text text--darken-1 text-center">
                       {{ product.price }}с
                     </div>
 
@@ -122,7 +122,7 @@
       <template v-else>
         <v-container class="pt-15">
           <v-row class="justify-space-between align-center mb-5">
-            <h1 class="">Ваш заказ</h1>
+            <h1 class="ml-1">Ваш заказ</h1>
             <v-btn large text color="green" @click="isOrder = !isOrder">Изменить</v-btn>
           </v-row>
           <template v-for="category in categories" :key="category.id">
