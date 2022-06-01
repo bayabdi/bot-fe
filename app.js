@@ -16,7 +16,6 @@ new Vue({
   methods: {
     orderAdd() {
       sendData = {
-        user_id: "string",
         products: [],
         comment: this.comment,
         sum: 0,
@@ -34,9 +33,19 @@ new Vue({
         })
       })
 
+      console.log(sendData)
+
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
         this.snackBar = true
-        window.Telegram.WebApp.sendData({ button_text: "Заказ #" + data.data, data: data.data })
+        let bytes = []
+        const str = 'aaaaa'
+        for (let i = 0; i < str.length; i++) {
+          let char = str.charCodeAt(i)
+          bytes.push(char >>> 8)
+          bytes.push(char & 0xff)
+        }
+        console.log(bytes)
+        window.Telegram.WebApp.sendData(bytes)
       }).catch(err => {
         this.isError = false
         console.log(err)
