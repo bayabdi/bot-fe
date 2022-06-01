@@ -10,7 +10,8 @@ new Vue({
       isError: false,
       orders: [],
       user_id: 0,
-      chat_id: 0
+      chat_id: 0,
+      telegram: window.Telegram.WebApp
     }
   },
   methods: {
@@ -37,17 +38,19 @@ new Vue({
 
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
         this.snackBar = true
-        let bytes = []
-        const str = 'aaaaa'
-        for (let i = 0; i < str.length; i++) {
-          let char = str.charCodeAt(i)
-          bytes.push(char >>> 8)
-          bytes.push(char & 0xff)
-        }
-        console.log(bytes)
-        window.Telegram.WebApp.sendData(bytes)
+        axios.post("https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery", {
+          web_app_query_id: this.telegram.initDataUnsafe.query_id,
+          result: {
+            type: 'article',
+            id: data.data,
+            title: 'Заказ',
+            input_message_content: {
+              message_text: 'Заказ #' + data.data
+            }
+          }
+        })
       }).catch(err => {
-        this.isError = false
+        this.isError = true
         console.log(err)
       })
     },
