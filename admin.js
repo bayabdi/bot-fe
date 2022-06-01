@@ -8,7 +8,8 @@ new Vue({
       pageSize: 12,
       isDone_: false,
       id: null,
-      order: null
+      order: null,
+      isLoading: true
     }
   },
   computed: {

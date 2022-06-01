@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,210 +9,152 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+    integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" />
 </head>
+
 <body>
   <div id="app">
     <v-app>
-      <template v-if="!isOrder">
-        <v-container class="pt-10">
-          <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
-            <h2 class="text-center my-3">{{ category.name }}</h2>
-            <v-row>
-              <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
-                  <v-card
-                    class="pa-1 pb-3"
-                    :max-width="200"
-                    elevation="0"
-                  >
-                    <v-btn
-                      v-if="product.amount > 0"
-                      fab
-                      dark
-                      x-small
-                      elevation="0"
-                      absolute
-                      right
-                      color="yellow darken-4"
-                      class="mr-n3 text-subtitle-2"
-                    >
-                      {{ product.amount }}
-                    </v-btn>
-                    <v-img
-                      class="rounded-xl"
-                      height="100"
-                      :src="'images/' + product.img"
-                    ></v-img>
-                
-                    <h3 class="text-center">
-                      {{ product.name }}
-                    </h3>
-
-                    <div style="height: 60px;" class="text-caption text-grey text-lowercase text-center">
-                      {{ product.description }}
-                    </div>
-
-                    <div class="text-h6 text-lowercase mt-1 red--text text--darken-1 text-center">
-                      {{ product.price }}с
-                    </div>
-
-                    <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
-                      <v-btn
-                        fab
-                        dark
-                        x-small
-                        elevation="0"
-                        class="mr-2"
-                        @click="product.amount--"
-                        color="red darken-1"
-                      >
-                        <v-icon>
-                          mdi-minus
-                        </v-icon>
+      <div :class="{ 'black': telegram.colorScheme != 'light' }" style="height: 100%">
+        <template v-if="!isLoading">
+          <template v-if="!isOrder">
+            <v-container class="pt-10">
+              <div v-for="category in categories" :key="category.id" class="mt-3 mb-12">
+                <h2 class="text-center my-3" :class="{ 'black': telegram.colorScheme != 'light' }">{{ category.name }}</h2>
+                <v-row>
+                  <v-col cols="6" sm="4" md="3" v-for="product in category.products" :key="product.id">
+                    <v-card class="pa-1 pb-3" :max-width="200" elevation="0"
+                      :class="{ 'black': telegram.colorScheme != 'light' }">
+                      <v-btn v-if="product.amount > 0" fab dark x-small elevation="0" absolute right
+                        color="yellow darken-4" class="mr-n3 text-subtitle-2">
+                        {{ product.amount }}
                       </v-btn>
-                      <v-btn
-                        fab
-                        dark
-                        x-small
-                        elevation="0"
-                        @click="product.amount++"
-                        color="yellow darken-4"
-                      >
-                        <v-icon>
-                          mdi-plus
-                        </v-icon>
-                      </v-btn>
-                    </div>
-                    <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
-                      <v-btn
-                        elevation="0"
-                        x-small
-                        class="py-4"
-                        dark
-                        @click="product.amount++"
-                        color="yellow darken-4"
-                      >
-                        Добавить
-                      </v-btn>
-                    </div>
-                  </v-card>
+                      <v-img class="rounded-xl" height="100" :src="'images/' + product.img"></v-img>
+                      <h3 class="text-center" :class="{ 'black': telegram.colorScheme != 'light' }">
+                        {{ product.name }}
+                      </h3>
+
+                      <div style="height: 60px;" class="text-caption text-grey text-lowercase text-center">
+                        {{ product.description }}
+                      </div>
+
+                      <div class="text-h6 text-lowercase mt-1 red--text text--darken-1 text-center">
+                        {{ product.price }}с
+                      </div>
+
+                      <div v-if="product.amount > 0" class="d-flex justify-center mt-2">
+                        <v-btn fab dark x-small elevation="0" class="mr-2" @click="product.amount--"
+                          color="red darken-1">
+                          <v-icon>
+                            mdi-minus
+                          </v-icon>
+                        </v-btn>
+                        <v-btn fab dark x-small elevation="0" @click="product.amount++" color="yellow darken-4">
+                          <v-icon>
+                            mdi-plus
+                          </v-icon>
+                        </v-btn>
+                      </div>
+                      <div v-if="product.amount < 1" class="d-flex justify-space-around mt-2">
+                        <v-btn elevation="0" x-small class="py-4" dark @click="product.amount++"
+                          color="yellow darken-4">
+                          Добавить
+                        </v-btn>
+                      </div>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-container>
+            <v-btn v-if="toPay > 0" fixed color="success" max-width="300" block dark
+              class="rounded-0 font-weight-bold py-5" center top style="top: 0 !important; z-index: 9;"
+              @click="isOrder = true">
+              Заказать на {{ toPay }}c
+            </v-btn>
+          </template>
+          <template v-else>
+            <v-container class="pt-15">
+              <v-row class="justify-space-between align-center mb-5">
+                <h1 class="ml-1">Ваш заказ</h1>
+                <v-btn large text color="green" @click="isOrder = !isOrder">Изменить</v-btn>
+              </v-row>
+              <template v-for="category in categories" :key="category.id">
+                <template v-for="product in category.products">
+                  <v-row v-if="product.amount > 0">
+                    <v-col cols="3" sm="2" class="pa-0">
+                      <v-img :src="'images/' + product.img" class="rounded-xl" />
+                    </v-col>
+                    <v-col cols="4" sm="3" class="d-flex align-center">
+                      <h2 class="font-weight-bold text-subtitle-2 text-sm-h4 text-wrap">
+                        {{ product.name }}
+                        </h1>
+                    </v-col>
+                    <v-col cols="2" class="d-flex align-center pl-0">
+                      <h1 class="yellow--text text--darken-4 text-h6 text-sm-h4 font-weight-bold">
+                        {{ product.amount }}x
+                      </h1>
+                    </v-col>
+                    <v-col cols="3" sm="5" class="d-flex align-end justify-end">
+                      <p class="text-h6 text-sm-h4 text-lowercase red--text text--darken-1">
+                        {{ product.price * product.amount }}C
+                      </p>
+                    </v-col>
+                  </v-row>
+                </template>
+              </template>
+              <v-row>
+                <v-text-field v-model="comment" class="mt-5" placeholder="Комментарий" filled></v-text-field>
+              </v-row>
+            </v-container>
+            <v-btn fixed color="success" max-width="300" block dark class="rounded-0 font-weight-bold py-5" center top
+              @click="orderAdd" style="top: 0 !important; z-index: 9">
+              Оплатить
+            </v-btn>
+            <v-snackbar v-model="snackBar" multi-line color="success" timeout="5000">
+              <template>
+                <v-row class="justify-space-around">
+                  <h3 class="my-auto">Ваш заказ принят </h3>
+                  <v-btn @click="snackBar = false" text class="text-h6">
+                    OK
+                  </v-btn>
+                </v-row>
+              </template>
+            </v-snackbar>
+            <v-snackbar v-model="isError" multi-line color="error" timeout="5000">
+              <template>
+                <v-row class="justify-space-around">
+                  <h3 class="my-auto">Произошла какая-то ошибка </h3>
+                  <v-btn @click="isError = false" text class="text-h6">
+                    OK
+                  </v-btn>
+                </v-row>
+              </template>
+            </v-snackbar>
+          </template>
+        </template>
+        <template v-else>
+          <v-container class="mt-16">
+            <v-row v-if="isLoading" class="mt-3">
+              <v-col cols="6" sm="4" md="3" v-for="product in categories" :key="product.id">
+                <v-card :max-width="200" elevation="0" :class="{ 'black': telegram.colorScheme != 'light' }"
+                  style="height: 100%">
+                  <div class="w-100 py-16 grey lighten-2 mb-15"></div>
+                  <div class="py-6 grey lighten-2 rounded mb-9 "></div>
+                </v-card>
               </v-col>
             </v-row>
-          </div>
-        </v-container>
-        <v-btn
-          v-if="toPay > 0"
-          fixed
-          color="success"
-          max-width="300"
-          block
-          dark
-          class="rounded-0 font-weight-bold py-5"
-          center
-          top
-          style="top: 0 !important; z-index: 9;"
-          @click="isOrder = true"
-        >
-            Заказать на  {{ toPay }}c
-        </v-btn>
-      </template>
-      <template v-else>
-        <v-container class="pt-15">
-          <v-row class="justify-space-between align-center mb-5">
-            <h1 class="ml-1">Ваш заказ</h1>
-            <v-btn large text color="green" @click="isOrder = !isOrder">Изменить</v-btn>
-          </v-row>
-          <template v-for="category in categories" :key="category.id">
-            <template v-for="product in category.products">
-              <v-row v-if="product.amount > 0">
-                <v-col cols="3" sm="2" class="pa-0"> 
-                  <v-img 
-                    :src="'images/' + product.img" 
-                    class="rounded-xl"
-                    />
-                </v-col>
-                <v-col cols="4" sm="3" class="d-flex align-center"  >
-                  <h2 class="font-weight-bold text-subtitle-2 text-sm-h4 text-wrap">
-                    {{ product.name }}
-                  </h1> 
-                  </v-col>
-                  <v-col cols="2"  class="d-flex align-center pl-0">
-                  <h1
-                    class="yellow--text text--darken-4 text-h6 text-sm-h4 font-weight-bold"
-                  >
-                    {{ product.amount }}x
-                  </h1>
-                  </v-col>
-                <v-col cols="3" sm="5" class="d-flex align-end justify-end">
-                  <p
-                    class="text-h6 text-sm-h4 text-lowercase red--text text--darken-1"
-                  >
-                    {{ product.price * product.amount }}C
-                  </p>
-                </v-col>
-              </v-row>
-            </template>
-          </template>
-          <v-row>
-            <v-text-field
-              v-model="comment"
-              class="mt-5"
-              placeholder="Комментарий"
-              filled
-            ></v-text-field>
-          </v-row>
-        </v-container>
-        <v-btn
-          fixed
-          color="success"
-          max-width="300"
-          block
-          dark
-          class="rounded-0 font-weight-bold py-5"
-          center
-          top
-          @click="orderAdd"
-          style="top: 0 !important; z-index: 9"
-        >
-            Оплатить
-        </v-btn>
-        <v-snackbar 
-          v-model="snackBar"
-          multi-line
-          color="success"
-          timeout="5000"
-        >
-          <template>
-              <v-row class="justify-space-around"> 
-                <h3 class="my-auto">Ваш заказ принят </h3>
-                <v-btn @click="snackBar = false" text class="text-h6">
-                    OK
-                </v-btn>
-              </v-row>
-          </template>
-        </v-snackbar>
-        <v-snackbar 
-          v-model="isError"
-          multi-line
-          color="error"
-          timeout="5000"
-        >
-          <template>
-              <v-row class="justify-space-around"> 
-                <h3 class="my-auto">Произошла какая-то ошибка </h3>
-                <v-btn @click="isError = false" text class="text-h6">
-                    OK
-                </v-btn>
-              </v-row>
-          </template>
-        </v-snackbar>
-      </template>
+          </v-container>
+        </template>
+      </div>
     </v-app>
   </div>
   <script src="app.js"></script>
 </body>
+
 </html>

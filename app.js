@@ -11,7 +11,8 @@ new Vue({
       orders: [],
       user_id: 0,
       chat_id: 0,
-      telegram: window.Telegram.WebApp
+      telegram: window.Telegram.WebApp,
+      isLoading: true
     }
   },
   methods: {
@@ -90,6 +91,8 @@ new Vue({
     this.user_id = urlParams.get('user_id')
     this.chat_id = urlParams.get("chat_id")
 
+    console.log(this.telegram.colorScheme)
+
     axios.get("https://api.1bot.edugid.org/category/list").then((response) => {
       response.data.forEach((x) => {
         category = {
@@ -113,4 +116,9 @@ new Vue({
       })
     })
   },
+  mounted () {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 1500)
+  }
 })
