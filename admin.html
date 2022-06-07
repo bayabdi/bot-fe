@@ -34,39 +34,62 @@
     <div id="admin">
       <v-app>
         <template v-if="!isLoading">
-        <v-container>
+        <v-container class="pt-16">
           <div v-if="id===null">
-            <v-row class="justify-center align-center">
-              <v-col cols="12" sm="12" md="8">
-                <v-card class="mt-16">
-                  <v-row>
-                    <v-col cols="6" class="text-center ma-0 pr-0 pt-0">
+            <v-row class="justify-center">
+              <v-col cols="12">
+                  <v-row class="justify-center">
+                    <v-col cols="5" sm="6" class="text-center ma-0 pr-0 pt-0">
                       <v-btn
                         large
                         @click="isDone = false; getOrders(true)"
                         router
                         block
-                        class="white--text rounded-0"
+                        class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
                         :class="{ 'orange': isDone }"
                         :disabled="!isDone"
                       >
-                        Active
+                        Активные заказы
                       </v-btn>
                     </v-col>
-                    <v-col cols="6" class="ma-0 pl-0 pt-0">
+                    <v-col cols="5" sm="6" class="ma-0 pl-0 pt-0">
                       <v-btn
                         large
                         @click="isDone = true; getOrders(true)"
                         block
                         router
-                        class="white--text rounded-0"
+                        class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1 mb-6"
                         :class="{ 'orange': !isDone }"
                         :disabled="isDone"
                       >
-                        Done
+                        Готовые заказы
                       </v-btn>
                     </v-col>
                   </v-row>
+                  <v-card class="px-6 px-sm-10">
+                    <v-row class="align-center justify-space-between">
+                      <v-col class="px-0" cols="3" sm="1" md="2">
+                        <a
+                          class="orange font-weight-bold d-inline-block py-1 py-md-2 px-5 px-sm-6 px-md-8 rounded-lg mb-0 text-subtitle-2
+                          text-sm-subtitle-1 text-decoration-underline text--black">
+                          #59
+                        </a>
+                      </v-col>
+                      <v-col class="px-0 font-weight-medium text-caption text-sm-body-1" cols="6" sm="6">
+                        <p class="mb-0">
+                          1 - Двойной чизбургер
+                        </p>
+                      </v-col>
+                      <v-col class="px-0" cols="3">
+                        <v-btn
+                          style="text-transform: unset !important;"
+                          block
+                          class="white--text orange text-caption text-sm-body-1">
+                          Готово
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card>
                   <div class="" v-for="order in orders" :key="order.id">
                     <v-row>
                       <v-col cols="2" md="1" class="pr-0 pt-5 ml-1 text-center">
@@ -77,7 +100,7 @@
                           v-for="product in order.products"
                           :key="product.id"
                         >
-                          {{ product.name }} ({{ product.amount }} шт.)<br />
+                          {{ product.amount }}-{{ product.name }} <br />
                         </span>
                         <span v-if="order.comment != ''"
                           >* {{ order.comment }}</span
@@ -91,13 +114,11 @@
                           color="success"
                           @click="done(order.id)"
                         >
-                          ОК
+                          Готово
                         </v-btn>
                       </v-col>
                     </v-row>
-                    <v-divider class="my-3" />
                   </div>
-                </v-card>
               </v-col>
             </v-row>
           </div>
