@@ -32,6 +32,9 @@ new Vue({
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll)
+        setTimeout(() => {
+          this.isLoading = false
+        }, 1500)
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll)

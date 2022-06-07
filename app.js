@@ -10,9 +10,13 @@ new Vue({
       isError: false,
       orders: [],
       user_id: 0,
+      category_id: 0,
       chat_id: 0,
       telegram: window.Telegram.WebApp,
-      isLoading: true
+      isLoading: true,
+      products_: [],
+      branches: [],
+      branch_id: 0
     }
   },
   methods: {
@@ -22,7 +26,8 @@ new Vue({
         comment: this.comment,
         sum: 0,
         user_id: this.user_id,
-        chat_id: this.chat_id
+        chat_id: this.chat_id,
+        branch_id: this.branch_id,
       }
       this.categories.forEach((category) => {
         category.products.forEach((product) => {
@@ -83,6 +88,23 @@ new Vue({
       set(val) {
         this.isOrder_ = val
       },
+    },
+    products: {
+      get() {
+        return this.products_
+      },
+      set(val) {
+        this.products_ = val
+      }
+    }
+  },
+  watch: {
+    category_id(nv, ov) {
+      this.categories.forEach(x => {
+        if (this.category_id === x.id) {
+          this.products = x.products
+        }
+      })
     }
   },
   created() {
@@ -94,6 +116,8 @@ new Vue({
     console.log(this.telegram.colorScheme)
 
     axios.get("https://api.1bot.edugid.org/category/list").then((response) => {
+      if(response.data.length > 0)
+        this.category_id = response.data[0].id
       response.data.forEach((x) => {
         category = {
           id: x.id,
@@ -111,9 +135,11 @@ new Vue({
             amount: 0,
           })
         })
-
         this.categories.push(category)
       })
+    })
+    axios.get("https://api.1bot.edugid.org/branch/list").then((response) => {
+      this.branches = response.data
     })
   },
   mounted () {
