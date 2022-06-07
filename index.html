@@ -227,13 +227,9 @@
         </template>
         <template v-else>
           <v-container class="mt-16">
-            <v-row v-if="!isLoading" class="mt-3">
-              <v-col cols="6" sm="4" md="3" v-for="product in categories" :key="product.id">
-                <v-card :max-width="200" elevation="0" :class="{ 'black': telegram.colorScheme != 'light' }"
-                  style="height: 100%">
-                  <div class="w-100 py-16 grey lighten-2 mb-15"></div>
-                  <div class="py-6 grey lighten-2 rounded mb-9 "></div>
-                </v-card>
+            <v-row v-if="isLoading" class="mt-3">
+              <v-col cols="6" sm="4" md="4" v-for="product in products" :key="product.id">
+                  <div style="padding: 120px 0;" class="rounded-lg px-16 grey lighten-2"></div>
               </v-col>
             </v-row>
           </v-container>
