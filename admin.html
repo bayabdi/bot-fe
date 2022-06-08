@@ -38,17 +38,16 @@
              <div v-if="id===null">
               <v-row class="justify-center">
                 <v-col cols="12">
-                    <v-row class="justify-center">
+                    <v-row class="mb-10">
                       <v-col cols="6" sm="6" class="text-center ma-0 pr-0 pt-0">
                         <v-btn
                           large
                           @click="isDone = false; getOrders(true)"
                           router
                           block
-                          class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
-                          :class="{ 'orange': isDone }"
-                          :disabled="!isDone"
-                          style="text-transform: unset !important;"
+                          style="background: rgba(231, 133, 55, 0.3); color: #E78537;text-transform: unset !important;"
+                          class="rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
+                          :class="{ 'black--text white': isDone }"
                         >
                           Активные заказы
                         </v-btn>
@@ -59,56 +58,14 @@
                           @click="isDone = true; getOrders(true)"
                           block
                           router
-                          class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1 mb-6"
-                          :class="{ 'orange': !isDone }"
-                          :disabled="isDone"
-                          style="text-transform: unset !important;"
+                          style="background: rgba(231, 133, 55, 0.3); color: #E78537;text-transform: unset !important;"
+                          class="rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
+                          :class="{ 'black--text white': !isDone }"
                         >
                           Готовые заказы
                         </v-btn>
                       </v-col>
                     </v-row>
-                    <!--
-                    <div v-for="order in orders" :key="order.id">
-                      <v-card class="px-6 px-sm-10">
-                        <v-row class="align-center justify-space-between">
-                          <v-col class="px-0" cols="12" sm="1" md="2">
-                            <a
-                              class="orange font-weight-bold d-inline-block py-1 py-md-2 px-5 px-sm-6 px-md-8 rounded-lg mb-0 text-subtitle-2
-                              text-sm-subtitle-1 text-decoration-underline"
-                              style="color: white;"
-                              :href=":href="'?id=' + order.id"
-                            >
-                              #59 
-                              #{{ order.id }}
-                            </a>
-                          </v-col>
-                          <v-col class="px-0 font-weight-medium text-caption text-sm-body-1" cols="12" sm="6">
-                            <p
-                              v-for="product in order.products"
-                              class="mb-0">
-                              ({{ product.amount }}){{ product.name }}
-                            </p>
-                            <span
-                              v-if="order.comment != ''"
-                              class="text-caption font-weight-normal">
-                                 {{ order.comment }}
-                            </span>
-                          </v-col>
-                          <v-col class="px-0" cols="12" sm="3">
-                            <v-btn
-                              v-if="order.isDone === 'False'"
-                              style="text-transform: unset !important;"
-                              block
-                              class="white--text orange text-caption text-sm-body-1 font-weight-medium"
-                              @click="done(order.id)"
-                              >
-                              Готово
-                            </v-btn>
-                          </v-col>
-                        </v-row>
-                      </v-card>
-                    </div>  -->
                     <div v-for="order in orders" :key="order.id">
                       <v-card class="px-6 px-sm-12 mb-10 py-8">
                         <v-row class="align-center justify-space-between">
@@ -117,6 +74,7 @@
                               class="font-weight-bold d-inline-block py-1 px-5 mb-0 text-subtitle-2
                               text-sm-subtitle-1 text-decoration-underline"
                               style="color: black;background: rgba(231, 133, 55, 0.3); border-radius: 4px;"
+                              :href="'?id=' + order.id"
                               >
                               #{{ order.id }}
                             </a>
@@ -124,8 +82,8 @@
                           <v-col class="px-0 " cols="12" sm="6">
                             <p
                               v-for="product in order.products"
-                              class="mb-0 font-weight-normal text-caption text-sm-body-1">
-                                ({{ product.amount }}) {{ product.name }}
+                              class="mb-0 font-weight-medium text-body-1">
+                                {{ product.name }} ({{ product.amount }})
                             </p>
                             <span
                               v-if="order.comment != ''"
@@ -138,11 +96,21 @@
                               v-if="order.isDone === 'False'"
                               style="text-transform: unset !important;"
                               block
-                              class="white--text orange text-caption text-sm-body-1 font-weight-medium"
+                              class="white--text text-body-1 font-weight-normal"
                               @click="done(order.id)"
+                              color="#E78537"
                             >
                               Готово
                             </v-btn>
+                            <p
+                              v-else
+                              style="text-transform: unset !important;background:rgba(231, 133, 55, 0.3);border-radius: 4px;"
+                              block
+                              class="text-center py-2 px-16 font-weight-medium"
+                              color="rgba(231, 133, 55, 0.3)"
+                            >
+                              Заказ выполнен
+                            </p>
                           </v-col>
                         </v-row>
                       </v-card>
@@ -200,15 +168,15 @@
           </v-container>
       </template>
       <template v-else>
-        <div>
           <v-container>
-            <v-row class="justify-center align-center">
-              <v-col cols="12" sm="12" md="8">
-                <div class="grey lighten-2 mt-16 pb-16 rounded-xl" style="height: 100vh;"></div>
-              </v-col>
-            </v-row>
+            <div style="margin-top: 130px">
+              <v-row v-for="order in orders" :key="order.id" class="justify-center">
+                <v-col cols="12">
+                  <div class="grey lighten-2 py-16 py-md-13 rounded-md"></div>
+                </v-col>
+              </v-row>
+            </div>
           </v-container>
-        </div>
       </template>
     </v-app>
     </div>
