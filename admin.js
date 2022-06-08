@@ -54,7 +54,8 @@ new Vue({
             this.pageSize +
             "&isDone=" +
             this.isDone +
-            "&isPaid=False"
+            "&isPaid=False" +
+            "&branch_id=1"
         )
         .then((response) => {
           response.data.list.forEach((x) => {

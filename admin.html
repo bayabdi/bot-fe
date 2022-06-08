@@ -34,142 +34,170 @@
     <div id="admin">
       <v-app>
         <template v-if="!isLoading">
-        <v-container class="pt-16">
-          <div v-if="id===null">
-            <v-row class="justify-center">
-              <v-col cols="12">
-                  <v-row class="justify-center">
-                    <v-col cols="5" sm="6" class="text-center ma-0 pr-0 pt-0">
-                      <v-btn
-                        large
-                        @click="isDone = false; getOrders(true)"
-                        router
-                        block
-                        class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
-                        :class="{ 'orange': isDone }"
-                        :disabled="!isDone"
-                      >
-                        Активные заказы
-                      </v-btn>
-                    </v-col>
-                    <v-col cols="5" sm="6" class="ma-0 pl-0 pt-0">
-                      <v-btn
-                        large
-                        @click="isDone = true; getOrders(true)"
-                        block
-                        router
-                        class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1 mb-6"
-                        :class="{ 'orange': !isDone }"
-                        :disabled="isDone"
-                      >
-                        Готовые заказы
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                  <v-card class="px-6 px-sm-10">
-                    <v-row class="align-center justify-space-between">
-                      <v-col class="px-0" cols="3" sm="1" md="2">
-                        <a
-                          class="orange font-weight-bold d-inline-block py-1 py-md-2 px-5 px-sm-6 px-md-8 rounded-lg mb-0 text-subtitle-2
-                          text-sm-subtitle-1 text-decoration-underline text--black">
-                          #59
-                        </a>
-                      </v-col>
-                      <v-col class="px-0 font-weight-medium text-caption text-sm-body-1" cols="6" sm="6">
-                        <p class="mb-0">
-                          1 - Двойной чизбургер
-                        </p>
-                      </v-col>
-                      <v-col class="px-0" cols="3">
+          <v-container class="pt-16">
+             <div v-if="id===null">
+              <v-row class="justify-center">
+                <v-col cols="12">
+                    <v-row class="justify-center">
+                      <v-col cols="6" sm="6" class="text-center ma-0 pr-0 pt-0">
                         <v-btn
-                          style="text-transform: unset !important;"
+                          large
+                          @click="isDone = false; getOrders(true)"
+                          router
                           block
-                          class="white--text orange text-caption text-sm-body-1">
-                          Готово
+                          class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1"
+                          :class="{ 'orange': isDone }"
+                          :disabled="!isDone"
+                          style="text-transform: unset !important;"
+                        >
+                          Активные заказы
                         </v-btn>
                       </v-col>
-                    </v-row>
-                  </v-card>
-                  <div class="" v-for="order in orders" :key="order.id">
-                    <v-row>
-                      <v-col cols="2" md="1" class="pr-0 pt-5 ml-1 text-center">
-                        <a :href="'?id=' + order.id">#{{ order.id }}</a>
-                      </v-col>
-                      <v-col cols="7" md="7" class="pt-5 pl-0">
-                        <span
-                          v-for="product in order.products"
-                          :key="product.id"
-                        >
-                          {{ product.amount }}-{{ product.name }} <br />
-                        </span>
-                        <span v-if="order.comment != ''"
-                          >* {{ order.comment }}</span
-                        >
-                      </v-col>
-                      <v-col cols="1" class="">
+                      <v-col cols="6" sm="6" class="ma-0 pl-0 pt-0">
                         <v-btn
-                          v-if="order.isDone === 'False'"
-                          class="text-caption"
-                          small
-                          color="success"
-                          @click="done(order.id)"
+                          large
+                          @click="isDone = true; getOrders(true)"
+                          block
+                          router
+                          class="white--text rounded-t-lg rounded-b-0 text-caption text-sm-body-1 mb-6"
+                          :class="{ 'orange': !isDone }"
+                          :disabled="isDone"
+                          style="text-transform: unset !important;"
                         >
-                          Готово
+                          Готовые заказы
                         </v-btn>
                       </v-col>
                     </v-row>
-                  </div>
-              </v-col>
-            </v-row>
-          </div>
-          <div v-else>
-            <a href="/admin.html" class="text-h6">назад</a>
-            <h2 class="text-center">#{{order.id}}</h2>
-            <p class="text-h6 success--text" v-if="order.comment != ''">
-              * {{order.comment}}
-            </p>
-            <div>
-              <span
-                v-if="order.isDone != 'False'"
-                class="success text-h6 rounded-sm py-1 px-2 white--text"
-              >
-                готово
-              </span>
-              <span
-                v-else
-                class="error text-h6 rounded-sm py-1 px-2 white--text"
-              >
-                не готово
-              </span>
-              <span
-                v-if="order.isPaid != 'False'"
-                class="ml-3 primary text-h6 rounded-sm py-1 px-2 white--text"
-              >
-                оплаченно
-              </span>
-              <span
-                v-else
-                class="warning ml-3 text-h6 rounded-sm py-1 px-2 white--text"
-              >
-                не оплаченно
-              </span>
+                    <!--
+                    <div v-for="order in orders" :key="order.id">
+                      <v-card class="px-6 px-sm-10">
+                        <v-row class="align-center justify-space-between">
+                          <v-col class="px-0" cols="12" sm="1" md="2">
+                            <a
+                              class="orange font-weight-bold d-inline-block py-1 py-md-2 px-5 px-sm-6 px-md-8 rounded-lg mb-0 text-subtitle-2
+                              text-sm-subtitle-1 text-decoration-underline"
+                              style="color: white;"
+                              :href=":href="'?id=' + order.id"
+                            >
+                              #59 
+                              #{{ order.id }}
+                            </a>
+                          </v-col>
+                          <v-col class="px-0 font-weight-medium text-caption text-sm-body-1" cols="12" sm="6">
+                            <p
+                              v-for="product in order.products"
+                              class="mb-0">
+                              ({{ product.amount }}){{ product.name }}
+                            </p>
+                            <span
+                              v-if="order.comment != ''"
+                              class="text-caption font-weight-normal">
+                                 {{ order.comment }}
+                            </span>
+                          </v-col>
+                          <v-col class="px-0" cols="12" sm="3">
+                            <v-btn
+                              v-if="order.isDone === 'False'"
+                              style="text-transform: unset !important;"
+                              block
+                              class="white--text orange text-caption text-sm-body-1 font-weight-medium"
+                              @click="done(order.id)"
+                              >
+                              Готово
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </div>  -->
+                    <div v-for="order in orders" :key="order.id">
+                      <v-card class="px-6 px-sm-12 mb-10 py-8">
+                        <v-row class="align-center justify-space-between">
+                          <v-col class="px-0" cols="12" sm="1" md="2">
+                            <a
+                              class="font-weight-bold d-inline-block py-1 px-5 mb-0 text-subtitle-2
+                              text-sm-subtitle-1 text-decoration-underline"
+                              style="color: black;background: rgba(231, 133, 55, 0.3); border-radius: 4px;"
+                              >
+                              #{{ order.id }}
+                            </a>
+                          </v-col>
+                          <v-col class="px-0 " cols="12" sm="6">
+                            <p
+                              v-for="product in order.products"
+                              class="mb-0 font-weight-normal text-caption text-sm-body-1">
+                                ({{ product.amount }}) {{ product.name }}
+                            </p>
+                            <span
+                              v-if="order.comment != ''"
+                              class="text-caption font-weight-normal">
+                                * {{ order.comment }}
+                            </span>
+                          </v-col>
+                          <v-col class="px-0" cols="12" sm="3">
+                            <v-btn
+                              v-if="order.isDone === 'False'"
+                              style="text-transform: unset !important;"
+                              block
+                              class="white--text orange text-caption text-sm-body-1 font-weight-medium"
+                              @click="done(order.id)"
+                            >
+                              Готово
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </div>
+                </v-col>
+              </v-row>
             </div>
-            <h2 class="mt-3 text-uppercase">Общая сумма: {{order.sum}}c</h2>
-            <div v-for="product in order.products" :key="product.id">
-              <span class="text-subtitle-1 font-weight-black"
-                >{{ product.name }}</span
-              >
-              x
-              <span class="text-subtitle-1 font-weight-black"
-                >{{ product.amount }}</span
-              >
-              =
-              <span class="text-subtitle-1 font-weight-black"
-                >{{ product.sum }}c</span
-              >
+            <div v-else>
+              <a href="/admin.html" class="text-h6">назад</a>
+              <h2 class="text-center">#{{order.id}}</h2>
+              <p class="text-h6 success--text" v-if="order.comment != ''">
+                * {{order.comment}}
+              </p>
+              <div>
+                <span
+                  v-if="order.isDone != 'False'"
+                  class="success text-h6 rounded-sm py-1 px-2 white--text"
+                >
+                  готово
+                </span>
+                <span
+                  v-else
+                  class="error text-h6 rounded-sm py-1 px-2 white--text"
+                >
+                  не готово
+                </span>
+                <span
+                  v-if="order.isPaid != 'False'"
+                  class="ml-3 primary text-h6 rounded-sm py-1 px-2 white--text"
+                >
+                  оплаченно
+                </span>
+                <span
+                  v-else
+                  class="warning ml-3 text-h6 rounded-sm py-1 px-2 white--text"
+                >
+                  не оплаченно
+                </span>
+              </div>
+              <h2 class="mt-3 text-uppercase">Общая сумма: {{order.sum}}c</h2>
+              <div v-for="product in order.products" :key="product.id">
+                <span class="text-subtitle-1 font-weight-black"
+                  >{{ product.name }}</span
+                >
+                x
+                <span class="text-subtitle-1 font-weight-black"
+                  >{{ product.amount }}</span
+                >
+                =
+                <span class="text-subtitle-1 font-weight-black"
+                  >{{ product.sum }}c</span
+                >
+              </div>
             </div>
-          </div>
-        </v-container>
+          </v-container>
       </template>
       <template v-else>
         <div>
