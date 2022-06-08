@@ -34,7 +34,7 @@
     <div id="admin">
       <v-app>
         <template v-if="!isLoading">
-          <v-container class="pt-16">
+          <v-container class="pt-5 pt-md-16 px-lg-16">
              <div v-if="id===null">
               <v-row class="justify-center">
                 <v-col cols="12">
@@ -72,8 +72,9 @@
                           <v-col class="px-0" cols="12" sm="1" md="2">
                             <a
                               class="font-weight-bold d-inline-block py-1 px-5 mb-0 text-subtitle-2
-                              text-sm-subtitle-1 text-decoration-underline"
-                              style="color: black;background: rgba(231, 133, 55, 0.3); border-radius: 4px;"
+                              text-sm-subtitle-1"
+                              style="color: black;background: rgba(231, 133, 55, 0.3);border-radius: 4px;
+                              text-decoration:none;"
                               :href="'?id=' + order.id"
                               >
                               #{{ order.id }}
@@ -106,7 +107,7 @@
                               v-else
                               style="text-transform: unset !important;background:rgba(231, 133, 55, 0.3);border-radius: 4px;"
                               block
-                              class="text-center py-2 px-16 font-weight-medium"
+                              class="text-center py-2 font-weight-medium text-no-wrap"
                               color="rgba(231, 133, 55, 0.3)"
                             >
                               Заказ выполнен
@@ -118,52 +119,89 @@
                 </v-col>
               </v-row>
             </div>
-            <div v-else>
-              <a href="/admin.html" class="text-h6">назад</a>
-              <h2 class="text-center">#{{order.id}}</h2>
-              <p class="text-h6 success--text" v-if="order.comment != ''">
-                * {{order.comment}}
-              </p>
-              <div>
+            <div v-else class="">
+              <v-row class="mb-6">
+                <v-col>
+                  <v-row class="mb-0 mb-sm-7">
+                <v-col class="py-0 pa-sm-3">
+                  <a
+                    href="/admin.html"
+                    class=""
+                    style="text-decoration: none;">
+                  <v-btn
+                    text
+                    class="font-weight-medium text-body-1 text--black px-0"
+                    style="text-transform: unset !important;">
+                    <v-icon>
+                      mdi-arrow-left
+                    </v-icon>
+                    Назад
+                  </v-btn>
+                  </a>
+                </v-col>
+              </v-row>
+              <v-row class="mb-7">
+                <v-col class="py-0 d-flex justify-end d-sm-block">
+                  <p class="font-weight-bold d-inline-block py-2 px-5 mb-0
+                    text-subtitle-1"
+                    style="background:rgba(231, 133, 55, 0.3);border-radius: 4px;">
+                      Заказ #{{order.id}}
+                  </p>
+                </v-col>
+              </v-row>
+                <v-row>
+                    <v-col class="pa-0 d-flex justify-end">
                 <span
                   v-if="order.isDone != 'False'"
-                  class="success text-h6 rounded-sm py-1 px-2 white--text"
+                  style="border-radius: 4px"
+                  class="success text-h6  pa-2 white--text"
                 >
-                  готово
+                  Готово
                 </span>
                 <span
                   v-else
-                  class="error text-h6 rounded-sm py-1 px-2 white--text"
+                  style="border-radius: 4px"
+                  class="error text-h6  pa-2 white--text"
                 >
-                  не готово
+                  Не готово
                 </span>
                 <span
                   v-if="order.isPaid != 'False'"
-                  class="ml-3 primary text-h6 rounded-sm py-1 px-2 white--text"
+                  style="border-radius: 4px"
+                  class="ml-3 mr-3 mr-md-0 primary text-h6  pa-2 white--text"
                 >
-                  оплаченно
+                  Оплаченно
                 </span>
                 <span
                   v-else
-                  class="warning ml-3 text-h6 rounded-sm py-1 px-2 white--text"
+                  style="border-radius: 4px"
+                  class="warning ml-3 mr-3 mr-md-0 text-h6  pa-2 white--text"
                 >
-                  не оплаченно
+                  Не оплаченно
                 </span>
-              </div>
-              <h2 class="mt-3 text-uppercase">Общая сумма: {{order.sum}}c</h2>
-              <div v-for="product in order.products" :key="product.id">
-                <span class="text-subtitle-1 font-weight-black"
-                  >{{ product.name }}</span
-                >
-                x
-                <span class="text-subtitle-1 font-weight-black"
-                  >{{ product.amount }}</span
-                >
-                =
-                <span class="text-subtitle-1 font-weight-black"
-                  >{{ product.sum }}c</span
-                >
-              </div>
+                </v-col>
+                </v-row>
+              <v-row>
+                <v-col>
+                  <div v-for="product in order.products" :key="product.id">
+                    <span class="text-subtitle-1 font-weight-medium">{{ product.name }}</span>
+                    <span class="text-subtitle-1 font-weight-medium">({{ product.amount }})</span>
+                    -
+                    <span class="text-subtitle-1 font-weight-medium">{{ product.sum }}c</span>
+                  </div>
+                </v-col>
+              </v-row>
+              <p 
+                class="text-h6 success--text"
+                v-if="order.comment != ''">
+                * {{order.comment}}
+              </p>
+                </v-col>
+              </v-row>
+              <v-divider></v-divider>
+              <p class="mt-6 text-h6 font-weight-bold text-uppercase text-end">
+                Общая сумма: {{order.sum}}c
+              </p>
             </div>
           </v-container>
       </template>
