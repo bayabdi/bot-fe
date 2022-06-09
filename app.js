@@ -8,6 +8,7 @@ new Vue({
       comment: "",
       snackBar: false,
       isError: false,
+      isEmptyBranch: false,
       orders: [],
       user_id: 0,
       category_id: 0,
@@ -21,6 +22,10 @@ new Vue({
   },
   methods: {
     orderAdd() {
+      if (this.branch_id === 0){
+        this.isEmptyBranch = true
+        return
+      }
       sendData = {
         products: [],
         comment: this.comment,

@@ -54,7 +54,7 @@ new Vue({
             this.pageSize +
             "&isDone=" +
             this.isDone +
-            "&isPaid=False" +
+            "&isPaid=True" +
             "&branch_id=1"
         )
         .then((response) => {

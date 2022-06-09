@@ -88,7 +88,7 @@
                             </p>
                             <span
                               v-if="order.comment != ''"
-                              class="text-caption font-weight-normal">
+                              class="text-body-2 grey--text font-weight-medium">
                                 * {{ order.comment }}
                             </span>
                           </v-col>
@@ -161,21 +161,21 @@
                 <span
                   v-else
                   style="border-radius: 4px"
-                  class="error text-h6  pa-2 white--text"
+                  class="grey lighten-1 text-h6 pa-2 white--text"
                 >
                   Не готово
                 </span>
                 <span
                   v-if="order.isPaid != 'False'"
                   style="border-radius: 4px"
-                  class="ml-3 mr-3 mr-md-0 primary text-h6  pa-2 white--text"
+                  class="ml-3 mr-3 mr-md-0 success text-h6  pa-2 white--text"
                 >
                   Оплаченно
                 </span>
                 <span
                   v-else
                   style="border-radius: 4px"
-                  class="warning ml-3 mr-3 mr-md-0 text-h6  pa-2 white--text"
+                  class="grey lighten-1 ml-3 mr-3 mr-md-0 text-h6 pa-2 white--text"
                 >
                   Не оплаченно
                 </span>
@@ -192,7 +192,7 @@
                 </v-col>
               </v-row>
               <p 
-                class="text-h6 success--text"
+                class="text-body-2 grey--text font-weight-medium"
                 v-if="order.comment != ''">
                 * {{order.comment}}
               </p>
