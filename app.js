@@ -101,7 +101,7 @@ new Vue({
       }
     },
     height() {
-      return window.Telegram.WebApp
+      return window.Telegram.WebApp.viewportHeight
     }
   },
   watch: {
