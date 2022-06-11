@@ -10,7 +10,9 @@ new Vue({
       id: null,
       order: null,
       isLoading: true,
-      user: window.Telegram.WebApp.initDataUnsafe.user
+      user_id: 583334892,
+      telegram: window.Telegram.WebApp,
+      sig: ''
     }
   },
   computed: {
@@ -56,7 +58,7 @@ new Vue({
             "&isDone=" +
             this.isDone +
             "&isPaid=True" +
-            "&branch_id=1"
+            "&user_id=" + this.user_id
         )
         .then((response) => {
           response.data.list.forEach((x) => {
@@ -72,8 +74,8 @@ new Vue({
     },
     done(id) {
       axios
-        .post(
-          "https://api.1bot.edugid.org/order/done?id=" + id
+        .get(
+          "https://api.1bot.edugid.org/order/done?id=" + id + "&sig=" + this.sig
         )
         .then((response) => {
           this.isDone = true
@@ -84,7 +86,12 @@ new Vue({
       axios.get("https://api.1bot.edugid.org/order/get?id=" + this.id)
       .then(res => {
         this.order = res.data
-        console.log(this.order)
+      })
+    },
+    get_sig() {
+      axios.get("https://api.1bot.edugid.org/user/get_sig?id=" + this.user_id)
+      .then(res => {
+        this.sig =  res.data
       })
     }
   },
@@ -93,8 +100,8 @@ new Vue({
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     this.id = urlParams.get("id")
-    
-    console.log(this.id)
+
+    this.get_sig()
 
     if (this.id === null)
       this.getOrders()

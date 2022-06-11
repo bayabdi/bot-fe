@@ -33,10 +33,10 @@
   </head>
   <body>
     <div id="admin">
-      <pre>
-        {{ user }}
-      </pre>
       <v-app>
+        <pre>
+          {{ telegram }}
+        </pre>
         <template v-if="!isLoading">
           <v-container class="pt-5 pt-md-16 px-lg-16">
              <div v-if="id===null">
@@ -72,6 +72,18 @@
                     </v-row>
                     <div v-for="order in orders" :key="order.id">
                       <v-card class="px-6 px-sm-12 mb-10 py-8">
+                        <v-row>
+                          <v-col class="font-italic text-caption grey--text">
+                            <template v-if="!isDone">
+                              <span class="black--text font-bold">Время оплаты: </span>
+                              {{ new Date(order.paid_time + 'Z').toLocaleString('ru-RU') }}  
+                            </template>
+                            <template v-else>
+                              <span class="black--text font-bold">Время выполненение: </span>
+                              {{ new Date(order.done_time + 'Z').toLocaleString('ru-RU') }}  
+                            </template>
+                          </v-col>
+                        </v-row>
                         <v-row class="align-center justify-space-between">
                           <v-col class="px-0" cols="12" sm="1" md="2">
                             <a
