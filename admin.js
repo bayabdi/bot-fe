@@ -9,7 +9,8 @@ new Vue({
       isDone_: false,
       id: null,
       order: null,
-      isLoading: true
+      isLoading: true,
+      user: window.Telegram.WebApp.initDataUnsafe.user
     }
   },
   computed: {
