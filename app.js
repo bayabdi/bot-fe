@@ -99,9 +99,6 @@ new Vue({
       set(val) {
         this.products_ = val
       }
-    },
-    height() {
-      return window.Telegram.WebApp.viewportHeight
     }
   },
   watch: {
