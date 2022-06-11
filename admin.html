@@ -32,6 +32,9 @@
   </head>
   <body>
     <div id="admin">
+      <pre>
+        {{ window.Telegram.WebApp }}
+      </pre>
       <v-app>
         <template v-if="!isLoading">
           <v-container class="pt-5 pt-md-16 px-lg-16">
@@ -216,7 +219,7 @@
             </div>
           </v-container>
       </template>
-    </v-app>
+      </v-app>
     </div>
     <script src="admin.js"></script>
   </body>
