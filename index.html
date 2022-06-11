@@ -20,9 +20,11 @@
 <body class="">
   <div id="app">
     <v-app>
-      <pre class="mt-12">
-        {{ window.Telegram.WebApp }}
-      </pre>
+      <div style="margin-top: 200px;">
+        <pre>
+          {{ height }}
+        </pre>
+      </div>
       <div 
         :class="{ 'black': telegram.colorScheme != 'light' }"
         class="grey lighten-4"

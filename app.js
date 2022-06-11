@@ -99,6 +99,9 @@ new Vue({
       set(val) {
         this.products_ = val
       }
+    },
+    height() {
+      return window.Telegram.WebApp
     }
   },
   watch: {
@@ -115,8 +118,6 @@ new Vue({
     const urlParams = new URLSearchParams(queryString)
     this.user_id = urlParams.get('user_id')
     this.chat_id = urlParams.get("chat_id")
-
-    console.log(this.telegram.colorScheme)
 
     axios.get("https://api.1bot.edugid.org/category/list").then((response) => {
       if(response.data.length > 0)
