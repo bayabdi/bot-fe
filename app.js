@@ -45,23 +45,29 @@ new Vue({
         })
       })
 
-      axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
-        this.snackBar = true
-        axios.post("https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery", {
-          web_app_query_id: this.telegram.initDataUnsafe.query_id,
-          result: {
-            type: 'article',
-            id: data.data,
-            title: 'Заказ',
-            input_message_content: {
-              message_text: 'Заказ #' + data.data
+      axios
+        .post("https://api.bublik.edugid.org/order/add", sendData)
+        .then((data) => {
+          this.snackBar = true
+          axios.post(
+            "https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery",
+            {
+              web_app_query_id: this.telegram.initDataUnsafe.query_id,
+              result: {
+                type: "article",
+                id: data.data,
+                title: "Заказ",
+                input_message_content: {
+                  message_text: "Заказ #" + data.data,
+                },
+              },
             }
-          }
+          )
         })
-      }).catch(err => {
-        this.isError = true
-        console.log(err)
-      })
+        .catch((err) => {
+          this.isError = true
+          console.log(err)
+        })
     },
   },
   computed: {
@@ -116,30 +122,31 @@ new Vue({
     this.user_id = urlParams.get('user_id')
     this.chat_id = urlParams.get("chat_id")
 
-    axios.get("https://api.1bot.edugid.org/category/list").then((response) => {
-      if(response.data.length > 0)
-        this.category_id = response.data[0].id
-      response.data.forEach((x) => {
-        category = {
-          id: x.id,
-          name: x.name,
-          products: [],
-        }
+    axios
+      .get("https://api.bublik.edugid.org/category/list")
+      .then((response) => {
+        if (response.data.length > 0) this.category_id = response.data[0].id
+        response.data.forEach((x) => {
+          category = {
+            id: x.id,
+            name: x.name,
+            products: [],
+          }
 
-        x.products.forEach((p) => {
-          category.products.push({
-            id: p.id,
-            name: p.name,
-            description: p.description,
-            price: p.price,
-            img: p.img,
-            amount: 0,
+          x.products.forEach((p) => {
+            category.products.push({
+              id: p.id,
+              name: p.name,
+              description: p.description,
+              price: p.price,
+              img: p.img,
+              amount: 0,
+            })
           })
+          this.categories.push(category)
         })
-        this.categories.push(category)
       })
-    })
-    axios.get("https://api.1bot.edugid.org/branch/list").then((response) => {
+    axios.get("https://api.bublik.edugid.org/branch/list").then((response) => {
       this.branches = response.data
     })
   },

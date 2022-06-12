@@ -51,14 +51,15 @@ new Vue({
 
       axios
         .get(
-          "https://api.1bot.edugid.org/order/list?page=" +
+          "https://api.bublik.edugid.org/order/list?page=" +
             this.page +
             "&pageSize=" +
             this.pageSize +
             "&isDone=" +
             this.isDone +
             "&isPaid=True" +
-            "&user_id=" + this.user_id
+            "&user_id=" +
+            this.user_id
         )
         .then((response) => {
           response.data.list.forEach((x) => {
@@ -75,7 +76,10 @@ new Vue({
     done(id) {
       axios
         .get(
-          "https://api.1bot.edugid.org/order/done?id=" + id + "&sig=" + this.sig
+          "https://api.bublik.edugid.org/order/done?id=" +
+            id +
+            "&sig=" +
+            this.sig
         )
         .then((response) => {
           this.isDone = true
@@ -83,16 +87,18 @@ new Vue({
         })
     },
     getOrder() {
-      axios.get("https://api.1bot.edugid.org/order/get?id=" + this.id)
-      .then(res => {
-        this.order = res.data
-      })
+      axios
+        .get("https://api.bublik.edugid.org/order/get?id=" + this.id)
+        .then((res) => {
+          this.order = res.data
+        })
     },
     get_sig() {
-      axios.get("https://api.1bot.edugid.org/user/get_sig?id=" + this.user_id)
-      .then(res => {
-        this.sig =  res.data
-      })
+      axios
+        .get("https://api.bublik.edugid.org/user/get_sig?id=" + this.user_id)
+        .then((res) => {
+          this.sig = res.data
+        })
     }
   },
   created() {
