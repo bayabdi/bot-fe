@@ -138,7 +138,7 @@
                     <v-col
                       cols="3"
                       sm="2"
-                      class="py-0 pl-0 d-flex align-center">
+                      class="py-0 pl-2 d-flex align-center">
                       <v-img
                         :src="'images/' + product.img"
                         class="" />
@@ -170,6 +170,7 @@
                   hide-details
                   solo
                   flat
+                  persistent-placeholder
                   placeholder="Выберите филиал"
                   :items="branches"
                   item-value="id"
@@ -180,22 +181,46 @@
             </div>
             <div class="white py-1 mb-5">
               <v-container>
-                <v-radio-group>
+                <v-radio-group v-model="order_type">
                   <v-row >
                     <v-col>
                       <v-radio
-                        label="С собой"
-                        value="dsa"
+                        class="font-weight-bold"
+                        label="В заведении"
+                        :value="0"
+                        color="rgba(231, 133, 55, 1)"
                         ></v-radio>
                     </v-col>
                     <v-col>
                       <v-radio
-                        label="На месте"
-                        value="dsaadsa"
+                        class="font-weight-bold"
+                        label="На вынос"
+                        :value="1"
+                        color="rgba(231, 133, 55, 1)"
                         ></v-radio>
                     </v-col>
                   </v-row>
                 </v-radio-group>
+
+                <div v-if="order_type == 0" class="d-flex justify-space-between">
+                  <p class="text-body-1">
+                    Обслуживание
+                  </p>
+                  <p class="text-body-1 font-weight-bold">
+                    + {{toPay * 0.15}} сом (15%)
+                  </p>
+                </div>
+
+                <div v-if="order_type == 1" class="d-flex justify-space-between">
+                  <p class="text-body-1">
+                    Обслуживание
+                  </p>
+                  <p class="text-body-1 font-weight-bold">
+                    0 сом
+                  </p>
+                </div>
+
+                
               </v-container>
             </div>
               <div class="white">
@@ -220,7 +245,12 @@
               style="z-index: 9; top: 0;"
               @click="orderAdd"
               >
-                Оплатить ({{ toPay }} сом)
+                <template v-if="order_type == 1">
+                  Оплатить ({{(Math.round(toPay * 115)/100).toFixed(2)}} сом)
+                </template>
+                <template v-else>
+                  Оплатить ({{ toPay }} сом)
+                </template>
             </v-btn>
             <v-snackbar
               

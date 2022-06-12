@@ -18,7 +18,7 @@ new Vue({
       products_: [],
       branches: [],
       branch_id: 0,
-      radios: null
+      order_type_: 0
     }
   },
   methods: {
@@ -107,6 +107,14 @@ new Vue({
         this.products_ = val
       },
     },
+    order_type: {
+      get() {
+        return this.order_type_
+      },
+      set(val) {
+        this.order_type_ = val
+      }
+    }
   },
   watch: {
     category_id(nv, ov) {

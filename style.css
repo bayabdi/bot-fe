@@ -4,3 +4,9 @@ body{
 .btnbg {
     background-color: rgba(231, 133, 55, 0.3);
 }
+
+.v-select__selection,
+.v-select__selection--comma,
+.v-select.v-text-field input {
+  color: rgba(231, 133, 55, 1) !important;
+}
