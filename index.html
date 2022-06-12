@@ -123,7 +123,7 @@
           <template v-else>
               <v-container class="mb-4 white">
                 <v-container class="pt-15">
-                  <v-row class="justify-space-between mb-5">
+                  <v-row class="justify-space-between mb-5 mt-5">
                     <p class="text-uppercase text-body-1 text-sm-h5 font-weight-bold ml-3">Ваш заказ</p>
                     <v-btn text color="#E78537" @click="isOrder = !isOrder" class="pb-4">Изменить</v-btn>
                   </v-row>
@@ -193,7 +193,7 @@
               block
               dark
               class="py-7 font-weight-regular rounded-0"
-              style="z-index: 9; bottom: 0;"
+              style="z-index: 9; top: 0;"
               @click="orderAdd"
               >
                 Оплатить ({{ toPay }} сом)
