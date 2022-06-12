@@ -18,6 +18,7 @@ new Vue({
       products_: [],
       branches: [],
       branch_id: 0,
+      radios: null
     }
   },
   methods: {

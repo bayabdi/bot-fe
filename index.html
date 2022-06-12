@@ -62,7 +62,8 @@
                     ></v-img>
                     <v-row class="mx-0 ">
                       <v-col cols="9" sm="10" class="pa-0">
-                        <p style="height: 50px;" class="text-subtitle-1 mb-0 font-weight-medium">
+                        <p 
+                          style="line-height: 1.3em !important;" class="text-subtitle-1 mb-0 font-weight-medium">
                           {{ product.name }}  
                         </p>
                       </v-col>
@@ -72,9 +73,12 @@
                         </p>
                       </v-col>
                     </v-row>
-                    <v-row class=" mx-0 pb-14  ">
-                      <p style="height: 60px;" class="text-caption font-weight-light">
-                        {{ product.description }}
+                    <v-row class=" mx-0">
+                      <p
+                        style
+                        class="text-caption font-weight-light"  
+                      >
+                          {{ product.description }}
                       </p>
                     </v-row>
                     <v-row class="mx-0 justify-space-around">
@@ -172,6 +176,26 @@
                   item-text="name"
                   v-model="branch_id"
                   />
+              </v-container>
+            </div>
+            <div class="white py-1 mb-5">
+              <v-container>
+                <v-radio-group>
+                  <v-row >
+                    <v-col>
+                      <v-radio
+                        label="С собой"
+                        value="dsa"
+                        ></v-radio>
+                    </v-col>
+                    <v-col>
+                      <v-radio
+                        label="На месте"
+                        value="dsaadsa"
+                        ></v-radio>
+                    </v-col>
+                  </v-row>
+                </v-radio-group>
               </v-container>
             </div>
               <div class="white">
