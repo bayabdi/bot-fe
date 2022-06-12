@@ -17,12 +17,12 @@ new Vue({
       isLoading: true,
       products_: [],
       branches: [],
-      branch_id: 0
+      branch_id: 0,
     }
   },
   methods: {
     orderAdd() {
-      if (this.branch_id === 0){
+      if (this.branch_id === 0) {
         this.isEmptyBranch = true
         return
       }
@@ -50,7 +50,7 @@ new Vue({
         .then((data) => {
           this.snackBar = true
           axios.post(
-            "https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery",
+            "https://api.telegram.org/bot5464089868:AAEMRbu3cwMVVedhebYDHsJGPx_aOmHgKg4/answerWebAppQuery",
             {
               web_app_query_id: this.telegram.initDataUnsafe.query_id,
               result: {
@@ -104,22 +104,22 @@ new Vue({
       },
       set(val) {
         this.products_ = val
-      }
-    }
+      },
+    },
   },
   watch: {
     category_id(nv, ov) {
-      this.categories.forEach(x => {
+      this.categories.forEach((x) => {
         if (this.category_id === x.id) {
           this.products = x.products
         }
       })
-    }
+    },
   },
   created() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
-    this.user_id = urlParams.get('user_id')
+    this.user_id = urlParams.get("user_id")
     this.chat_id = urlParams.get("chat_id")
 
     axios
@@ -150,9 +150,9 @@ new Vue({
       this.branches = response.data
     })
   },
-  mounted () {
+  mounted() {
     setTimeout(() => {
       this.isLoading = false
     }, 1500)
-  }
+  },
 })
