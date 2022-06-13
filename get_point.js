@@ -45,7 +45,7 @@ new Vue({
             });
             text += br + '<b>Общая сумма:</b> ' + res.data.sum + 'c'
 
-            axios.post("https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/sendMessage", {
+            axios.post("https://api.telegram.org/bot5348269975:AAEy0BGl5BDk14kWvREa03gNvkFc5379_l4/sendMessage", {
               'chat_id': this.getUserId(),
               'text': text,
               'parse_mode': 'HTML'
