@@ -49,9 +49,10 @@ new Vue({
               'chat_id': this.getUserId(),
               'text': text,
               'parse_mode': 'HTML'
+            }).then(res => {
+              this.success = true
+              this.telegram.close()
             })
-            this.success = true
-            this.telegram.close()
           })
         }).catch(err => {
           console.log(err);
