@@ -47,7 +47,7 @@ new Vue({
 
       axios.post("https://api.1bot.edugid.org/order/add", sendData).then((data) => {
         this.snackBar = true
-        axios.post("https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/answerWebAppQuery", {
+        axios.post("https://api.telegram.org/bot5348269975:AAEy0BGl5BDk14kWvREa03gNvkFc5379_l4/answerWebAppQuery", {
           web_app_query_id: this.telegram.initDataUnsafe.query_id,
           result: {
             type: 'article',
