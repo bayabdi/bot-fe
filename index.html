@@ -62,7 +62,7 @@
                     ></v-img>
                     <v-row class="mx-0 ">
                       <v-col cols="9" sm="10" class="pa-0">
-                        <p style="height: 50px;" class="text-subtitle-1 mb-0 font-weight-medium">
+                        <p style="height: 50px; line-height: 1.2em;" class="text-subtitle-1 mb-0 font-weight-medium">
                           {{ product.name }}  
                         </p>
                       </v-col>
@@ -121,8 +121,8 @@
             </v-btn>
           </template>
           <template v-else>
-              <v-container class="mb-4 white">
-                <v-container class="pt-15">
+              <v-container class="mb-4 white ">
+                <v-container class="pt-15 mt-8">
                   <v-row class="justify-space-between mb-5">
                     <p class="text-uppercase text-body-1 text-sm-h5 font-weight-bold ml-3">Ваш заказ</p>
                     <v-btn text color="#E78537" @click="isOrder = !isOrder" class="pb-4">Изменить</v-btn>
@@ -167,6 +167,8 @@
                   solo
                   flat
                   placeholder="Выберите филиал"
+                  color="#E78537"
+                  item-color="#E78537"
                   :items="branches"
                   item-value="id"
                   item-text="name"
@@ -174,7 +176,7 @@
                   />
               </v-container>
             </div>
-              <div class="white">
+              <!-- <div class="white">
                 <v-container class="pa-0">
                 <v-text-field
                   v-model="comment"
@@ -184,8 +186,7 @@
                   hide-details  
                   >
                 </v-container>
-              </div>
-            
+              </div> -->
             <v-btn
               fixed
               color="success"
@@ -193,7 +194,7 @@
               block
               dark
               class="py-7 font-weight-regular rounded-0"
-              style="z-index: 9; bottom: 0;"
+              style="z-index: 9; top: 0;"
               @click="orderAdd"
               >
                 Оплатить ({{ toPay }} сом)
