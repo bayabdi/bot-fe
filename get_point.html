@@ -21,8 +21,8 @@
     <v-app>
       <div v-if="order == null" class="grey lighten-3 pt-16" style="height: 100vh;">
             <v-container>
-              <v-row>
-                <v-col>
+              <v-row class="px-2 mt-16 mb-2">
+                <v-col class="white">
                   <v-text-field
                     v-model="order_id"
                     type="number"
@@ -35,8 +35,14 @@
               </v-row>
               <v-row>
                 <v-col class="d-flex justify-end">
-                  <v-btn @click="apply" large>
-                    Применить
+                  <v-btn
+                    class="white--text py-5"
+                    block
+                    @click="apply"
+                    large dark
+                    color="#E78537"
+                  >
+                    Получить баллы
                   </v-btn>
                 </v-col>
               </v-row>
