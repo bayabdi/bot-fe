@@ -27,7 +27,7 @@ new Vue({
     apply() {
       axios
         .post(
-          "https://api.1bot.edugid.org/order/external?id=" + this.order_id + "&user_id=" + this.user_id
+          "https://api.1bot.edugid.org/order/external?id=" + this.order_id + "&user_id=" + this.getUserId()
         )
         .then((response) => {
           axios.get(

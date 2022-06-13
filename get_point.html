@@ -35,17 +35,35 @@
               </v-row>
               <v-row>
                 <v-col class="d-flex justify-end">
-                  <v-btn @click="apply" x-large>
+                  <v-btn @click="apply" large>
                     Применить
                   </v-btn>
                 </v-col>
               </v-row>
             </v-container>
       </div>
-      <div v-else>
-        <pre>
-          {{order}}
-        </pre>
+      <div v-else class="grey lighten-3 pt-16" style="height: 100vh;">
+          <v-container>
+            <v-card class="pa-4">
+              <v-row>
+                <v-col class="py-0">
+                  <p class="text-button text-end">
+                    Заказ #{{ order.id }}
+                  </p>
+                </v-col>
+              </v-row>
+              <v-row class="px-3">
+                  <p class="text-h6">Заказ:</p>
+              </v-row>
+                  <p v-for="product in order.products" :key="product.id">
+                    {{product.name}} ({{product.amount}}) - {{ product.sum }} сом
+                  </p>
+                  <v-divider></v-divider>
+                  <p class="text-end mt-2 text-uppercase font-weight-bold">
+                    Общая сумма: {{ order.sum }}
+                  </p>
+            </v-card>
+          </v-container>
       </div>
     </v-app>
   </div>
