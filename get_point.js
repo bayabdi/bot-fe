@@ -8,6 +8,7 @@ new Vue({
       order_: null,
       success: false,
       err: false,
+      telegram: window.Telegram.WebApp
     }
   },
   computed: {
@@ -36,8 +37,21 @@ new Vue({
             "https://api.1bot.edugid.org/order/get?id=" + this.order_id
           ).then(res => {
             this.order = res.data
+            
+            const br = String.fromCharCode(10)
+            let text = '<b>Заказ:</b> ' + br + br
+            res.data.products.forEach(x => {
+                text += '<b>' + x.name + '</b>' + ' x ' + x.amount + ' = ' + x.sum + 'c'  + br
+            });
+            text += br + '<b>Общая сумма:</b> ' + res.data.sum + 'c'
+
+            axios.post("https://api.telegram.org/bot5310334974:AAEzCchxDhtm-7HYnvjdzx6umzSkptGdQM8/sendMessage", {
+              'chat_id': this.getUserId(),
+              'text': text,
+              'parse_mode': 'HTML'
+            })
             this.success = true
-            console.log(this.order)
+            this.telegram.close()
           })
         }).catch(err => {
           console.log(err);
