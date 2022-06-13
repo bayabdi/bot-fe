@@ -25,7 +25,6 @@
                 <v-col class="white">
                   <v-text-field
                     v-model="order_id"
-                    type="number"
                     class="font-weight-bold"
                     solo flat
                     hide-details
@@ -46,11 +45,45 @@
                   </v-btn>
                 </v-col>
               </v-row>
+              <v-snackbar
+                fixed
+                top
+                v-model="err"
+                multi-line
+                color="error"
+                timeout="5000"
+              >
+              <template>
+                <v-row class="justify-space-around">
+                  <h3 class="my-auto">Не правильный номер заказа</h3>
+                  <v-btn @click="" text class="text-subtitle-1">
+                    OK
+                  </v-btn>
+                </v-row>
+              </template>
+            </v-snackbar>
             </v-container>
       </div>
       <div v-else class="grey lighten-3 pt-16" style="height: 100vh;">
           <v-container>
-            <v-card class="pa-4">
+            <v-snackbar
+              v-model="success"
+              multi-line
+              color="success"
+              timeout="5000"
+              fixed
+              top
+              >
+              <template>
+                <v-row class="justify-space-around">
+                  <h4 class="my-auto">Поздравляю вы получили баллы ! </h4>
+                  <v-btn @click="snackBar = false" text class="text-subtitle-1">
+                    OK
+                  </v-btn>
+                </v-row>
+              </template>
+            </v-snackbar>
+            <v-card class="pa-4 mt-16">
               <v-row>
                 <v-col class="py-0">
                   <p class="text-button text-end">

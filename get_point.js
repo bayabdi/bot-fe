@@ -5,7 +5,9 @@ new Vue({
     return {
       user_id: 0,
       order_id: null,
-      order_: null
+      order_: null,
+      success: false,
+      err: false,
     }
   },
   computed: {
@@ -34,8 +36,12 @@ new Vue({
             "https://api.1bot.edugid.org/order/get?id=" + this.order_id
           ).then(res => {
             this.order = res.data
+            this.success = true
             console.log(this.order)
           })
+        }).catch(err => {
+          console.log(err);
+          this.err = true
         })
     }
   }
