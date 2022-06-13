@@ -43,7 +43,8 @@ new Vue({
             res.data.products.forEach(x => {
                 text += '<b>' + x.name + '</b>' + ' x ' + x.amount + ' = ' + x.sum + 'c'  + br
             });
-            text += br + '<b>Общая сумма:</b> ' + res.data.sum + 'c'
+            text += br + '<b>Общая сумма:</b> ' + res.data.sum + 'c' + br
+            text += br + 'Поздравляем, вам зачислено ' + Math.ceil(res.data.sum / 10) + ' баллов! 🥳'
 
             axios.post("https://api.telegram.org/bot5348269975:AAEy0BGl5BDk14kWvREa03gNvkFc5379_l4/sendMessage", {
               'chat_id': this.getUserId(),
